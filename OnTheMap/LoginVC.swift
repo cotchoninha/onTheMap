@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import FacebookLogin
 
 class LoginVC: UIViewController{
     
@@ -17,6 +18,10 @@ class LoginVC: UIViewController{
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        let loginButton = LoginButton(readPermissions: [ .publicProfile ])
+        loginButton.center = view.center
+        
+        view.addSubview(loginButton)
     }
     
     @IBAction func loginButton(_ sender: Any) {
@@ -92,9 +97,6 @@ class LoginVC: UIViewController{
         let udacityWebSite = URL(string: "https://www.udacity.com/account/auth#!/signup")!
         UIApplication.shared.open(udacityWebSite, options: [:], completionHandler: nil)
         
-    }
-    
-    @IBAction func facebookSignin(_ sender: Any) {
     }
     
     
