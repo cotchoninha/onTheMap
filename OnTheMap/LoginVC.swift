@@ -9,19 +9,43 @@
 import Foundation
 import UIKit
 import FacebookLogin
+import FBSDKLoginKit
+import FacebookCore
 
-class LoginVC: UIViewController{
+class LoginVC: UIViewController, LoginButtonDelegate{
+    
+    func loginButtonDidLogOut(_ loginButton: LoginButton) {
+        print("logOut")
+    }
     
     @IBOutlet weak var usernameTextField: UITextField!
     
     @IBOutlet weak var passwordTextField: UITextField!
     
+    func loginButtonDidCompleteLogin(_ loginButton:LoginButton,result:LoginResult){
+        switch result {
+        case .failed(let error):
+            print(error)
+        case .cancelled:
+            print("Cancelled")
+        case .success(let grantedPermissions, let declinedPermissions, let accessToken):
+            print("Logged In")
+            completeLogin()
+        }
+        
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         let loginButton = LoginButton(readPermissions: [ .publicProfile ])
+        loginButton.delegate = self
         loginButton.center = view.center
-        
         view.addSubview(loginButton)
+    }
+    
+    func completeLogin() {
+        let controller = self.storyboard!.instantiateViewController(withIdentifier: "UsersTabBarController") as! UITabBarController
+        self.present(controller, animated: true, completion: nil)
     }
     
     @IBAction func loginButton(_ sender: Any) {
@@ -89,6 +113,7 @@ class LoginVC: UIViewController{
         }
         
         task.resume()
+        completeLogin()
         
     }
     
@@ -96,7 +121,6 @@ class LoginVC: UIViewController{
         
         let udacityWebSite = URL(string: "https://www.udacity.com/account/auth#!/signup")!
         UIApplication.shared.open(udacityWebSite, options: [:], completionHandler: nil)
-        
     }
     
     

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0C3F7E1020C71C8000A0E39C /* mapVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C3F7E0F20C71C8000A0E39C /* mapVC.swift */; };
 		0C9BFACB20C2A31300F5A25D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C9BFACA20C2A31300F5A25D /* AppDelegate.swift */; };
 		0C9BFAD020C2A31300F5A25D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0C9BFACE20C2A31300F5A25D /* Main.storyboard */; };
 		0C9BFAD220C2A31600F5A25D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0C9BFAD120C2A31600F5A25D /* Assets.xcassets */; };
@@ -17,6 +18,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0C3F7E0F20C71C8000A0E39C /* mapVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = mapVC.swift; sourceTree = "<group>"; };
 		0C9BFAC720C2A31300F5A25D /* OnTheMap.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OnTheMap.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0C9BFACA20C2A31300F5A25D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0C9BFACF20C2A31300F5A25D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -66,6 +68,7 @@
 				0C9BFACA20C2A31300F5A25D /* AppDelegate.swift */,
 				0C9BFADC20C53E5B00F5A25D /* LoginVC.swift */,
 				0C9BFADE20C5684900F5A25D /* Constants.swift */,
+				0C3F7E0F20C71C8000A0E39C /* mapVC.swift */,
 				0C9BFACE20C2A31300F5A25D /* Main.storyboard */,
 				0C9BFAD120C2A31600F5A25D /* Assets.xcassets */,
 				0C9BFAD320C2A31600F5A25D /* LaunchScreen.storyboard */,
@@ -212,6 +215,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0C9BFACB20C2A31300F5A25D /* AppDelegate.swift in Sources */,
+				0C3F7E1020C71C8000A0E39C /* mapVC.swift in Sources */,
 				0C9BFADD20C53E5B00F5A25D /* LoginVC.swift in Sources */,
 				0C9BFADF20C5684900F5A25D /* Constants.swift in Sources */,
 			);
