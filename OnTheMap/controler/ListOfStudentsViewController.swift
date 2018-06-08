@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class ListOfStudentsViewController: UIViewController, UITableViewDelegate,UITableViewDataSource {
+class ListOfStudentsViewController: UITableViewController {
     
     //primeiro eu vou pegar a localizacao dos students
     //declara a funcao get
@@ -24,14 +24,14 @@ class ListOfStudentsViewController: UIViewController, UITableViewDelegate,UITabl
     func getStudendLocation(){
         
         var request = URLRequest(url: URL(string: "https://parse.udacity.com/parse/classes/StudentLocation?limit=100&order=-updatedAt")!)
-        request.addValue("QrX47CA9cyuGewLdsL7o5Eb8iug6Em8ye0dnAbIr", forHTTPHeaderField: "QrX47CA9cyuGewLdsL7o5Eb8iug6Em8ye0dnAbIr")
-        request.addValue("QuWThTdiRmTux3YaDseUSEpUKo7aBYM737yKd4gY", forHTTPHeaderField: "QuWThTdiRmTux3YaDseUSEpUKo7aBYM737yKd4gY")
+        request.addValue("QrX47CA9cyuGewLdsL7o5Eb8iug6Em8ye0dnAbIr", forHTTPHeaderField: "X-Parse-Application-Id")
+        request.addValue("QuWThTdiRmTux3YaDseUSEpUKo7aBYM737yKd4gY", forHTTPHeaderField: "X-Parse-REST-API-Key")
         let session = URLSession.shared
         let task = session.dataTask(with: request) { data, response, error in
             func sendError(_ error: String) {
                 print(error)
             }
-            
+            print("received studentLocation response")
             /* GUARD: Was there an error? */
             guard (error == nil) else {
                 sendError("There was an error with your request: \(error!)")
@@ -49,33 +49,38 @@ class ListOfStudentsViewController: UIViewController, UITableViewDelegate,UITabl
                 sendError("No data was returned by the request!")
                 return
             }
+            print("StudentLocation is \(data)")
             
-            let parsedResult: [String:AnyObject]!
+            let parsedResult: [[String:AnyObject]]!
             do{
-                parsedResult = try JSONSerialization.jsonObject(with: data, options: .allowFragments) as? [String:AnyObject]
+                parsedResult = try JSONSerialization.jsonObject(with: data, options: .allowFragments) as? [[String:AnyObject]]
             } catch{
                 sendError("Could not parse the data as JSON: '\(data)'")
                 return
             }
+            
+            print("this is my parsedResult \(parsedResult)")
             //preciso pegar o nome do parsedresult e link
-            guard let id = parsedResult["id"], let uniqueKey = parsedResult["uniqueKey"], let firstName = parsedResult["firstName"], let lastName = parsedResult["lastName"], let mapString = parsedResult["mapString"], let mediaURL = parsedResult["mediaURL"], let latitude = parsedResult["latitude"], let longitude = parsedResult["longitude"], let createdAt = parsedResult["createdAt"], let updatedAt = parsedResult["updatedAt"] else{
-                sendError("couldn't data in Students")
-                return
+//            guard let id = parsedResult["id"], let uniqueKey = parsedResult["uniqueKey"], let firstName = parsedResult["firstName"], let lastName = parsedResult["lastName"], let mapString = parsedResult["mapString"], let mediaURL = parsedResult["mediaURL"], let latitude = parsedResult["latitude"], let longitude = parsedResult["longitude"], let createdAt = parsedResult["createdAt"], let updatedAt = parsedResult["updatedAt"] else{
+//                sendError("couldn't data in Students")
+//                return
             }
             
-            self.student?.id = id as! String
             //fazer alguma coisa com o nome
-            
-        }
+        print("**MARCELA** fazendo request para studentLocation")
         task.resume()
     }
     
+    override func viewDidLoad() {
+        getStudendLocation()
+    }
     
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 1
     }
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "tableViewCell", for: indexPath) as! LocationTableViewCell
         return cell
     }
