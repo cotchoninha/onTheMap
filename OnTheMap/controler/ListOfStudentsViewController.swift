@@ -51,9 +51,9 @@ class ListOfStudentsViewController: UITableViewController {
             }
             print("StudentLocation is \(data)")
             
-            let parsedResult: [[String:AnyObject]]!
+            let parsedResult: AnyObject!
             do{
-                parsedResult = try JSONSerialization.jsonObject(with: data, options: .allowFragments) as? [[String:AnyObject]]
+                parsedResult = try JSONSerialization.jsonObject(with: data, options: .allowFragments) as AnyObject?
             } catch{
                 sendError("Could not parse the data as JSON: '\(data)'")
                 return
