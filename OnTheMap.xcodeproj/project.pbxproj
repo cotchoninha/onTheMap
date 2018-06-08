@@ -8,6 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		0C3F7E1020C71C8000A0E39C /* mapVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C3F7E0F20C71C8000A0E39C /* mapVC.swift */; };
+		0C3F7E1820C9427600A0E39C /* tableVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C3F7E1720C9427600A0E39C /* tableVC.swift */; };
+		0C3F7E1A20C9678C00A0E39C /* Methods.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C3F7E1920C9678C00A0E39C /* Methods.swift */; };
+		0C3F7E1C20C97CA800A0E39C /* Students.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C3F7E1B20C97CA800A0E39C /* Students.swift */; };
+		0C3F7E1F20CA757700A0E39C /* LocationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C3F7E1E20CA757700A0E39C /* LocationTableViewCell.swift */; };
 		0C9BFACB20C2A31300F5A25D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C9BFACA20C2A31300F5A25D /* AppDelegate.swift */; };
 		0C9BFAD020C2A31300F5A25D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0C9BFACE20C2A31300F5A25D /* Main.storyboard */; };
 		0C9BFAD220C2A31600F5A25D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0C9BFAD120C2A31600F5A25D /* Assets.xcassets */; };
@@ -19,6 +23,10 @@
 
 /* Begin PBXFileReference section */
 		0C3F7E0F20C71C8000A0E39C /* mapVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = mapVC.swift; sourceTree = "<group>"; };
+		0C3F7E1720C9427600A0E39C /* tableVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = tableVC.swift; sourceTree = "<group>"; };
+		0C3F7E1920C9678C00A0E39C /* Methods.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Methods.swift; sourceTree = "<group>"; };
+		0C3F7E1B20C97CA800A0E39C /* Students.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Students.swift; sourceTree = "<group>"; };
+		0C3F7E1E20CA757700A0E39C /* LocationTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationTableViewCell.swift; sourceTree = "<group>"; };
 		0C9BFAC720C2A31300F5A25D /* OnTheMap.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OnTheMap.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0C9BFACA20C2A31300F5A25D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0C9BFACF20C2A31300F5A25D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -44,6 +52,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0C3F7E1D20C9A4DC00A0E39C /* controler */ = {
+			isa = PBXGroup;
+			children = (
+				0C9BFADC20C53E5B00F5A25D /* LoginVC.swift */,
+				0C3F7E0F20C71C8000A0E39C /* mapVC.swift */,
+				0C3F7E1E20CA757700A0E39C /* LocationTableViewCell.swift */,
+				0C3F7E1720C9427600A0E39C /* tableVC.swift */,
+			);
+			path = controler;
+			sourceTree = "<group>";
+		};
 		0C9BFABE20C2A31300F5A25D = {
 			isa = PBXGroup;
 			children = (
@@ -66,9 +85,10 @@
 			isa = PBXGroup;
 			children = (
 				0C9BFACA20C2A31300F5A25D /* AppDelegate.swift */,
-				0C9BFADC20C53E5B00F5A25D /* LoginVC.swift */,
 				0C9BFADE20C5684900F5A25D /* Constants.swift */,
-				0C3F7E0F20C71C8000A0E39C /* mapVC.swift */,
+				0C3F7E1D20C9A4DC00A0E39C /* controler */,
+				0C3F7E1B20C97CA800A0E39C /* Students.swift */,
+				0C3F7E1920C9678C00A0E39C /* Methods.swift */,
 				0C9BFACE20C2A31300F5A25D /* Main.storyboard */,
 				0C9BFAD120C2A31600F5A25D /* Assets.xcassets */,
 				0C9BFAD320C2A31600F5A25D /* LaunchScreen.storyboard */,
@@ -216,8 +236,12 @@
 			files = (
 				0C9BFACB20C2A31300F5A25D /* AppDelegate.swift in Sources */,
 				0C3F7E1020C71C8000A0E39C /* mapVC.swift in Sources */,
+				0C3F7E1F20CA757700A0E39C /* LocationTableViewCell.swift in Sources */,
+				0C3F7E1A20C9678C00A0E39C /* Methods.swift in Sources */,
+				0C3F7E1C20C97CA800A0E39C /* Students.swift in Sources */,
 				0C9BFADD20C53E5B00F5A25D /* LoginVC.swift in Sources */,
 				0C9BFADF20C5684900F5A25D /* Constants.swift in Sources */,
+				0C3F7E1820C9427600A0E39C /* tableVC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -88,13 +88,41 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="tWP-wD-mZd">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="tableViewCell" id="tWP-wD-mZd" customClass="LocationTableViewCell" customModule="OnTheMap" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="tWP-wD-mZd" id="rw9-zF-JKb">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_pin" translatesAutoresizingMaskIntoConstraints="NO" id="am9-M3-LTR">
+                                            <rect key="frame" x="16" y="3" width="36" height="36"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="36" id="3M7-ss-bKp"/>
+                                                <constraint firstAttribute="height" constant="36" id="LLX-l3-PMH"/>
+                                            </constraints>
+                                        </imageView>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="student name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qm4-Mi-6Ya">
+                                            <rect key="frame" x="60" y="3" width="105.5" height="36"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="Qm4-Mi-6Ya" firstAttribute="top" secondItem="rw9-zF-JKb" secondAttribute="top" constant="3" id="168-ZC-hoS"/>
+                                        <constraint firstAttribute="bottom" secondItem="am9-M3-LTR" secondAttribute="bottom" constant="4.5" id="4G3-4s-3YR"/>
+                                        <constraint firstAttribute="bottom" secondItem="Qm4-Mi-6Ya" secondAttribute="bottom" constant="4.5" id="80x-ow-HO8"/>
+                                        <constraint firstItem="am9-M3-LTR" firstAttribute="leading" secondItem="rw9-zF-JKb" secondAttribute="leading" constant="16" id="Y3h-y4-Je4"/>
+                                        <constraint firstItem="am9-M3-LTR" firstAttribute="leading" secondItem="rw9-zF-JKb" secondAttribute="leading" constant="16" id="aFe-Kv-0fj"/>
+                                        <constraint firstItem="Qm4-Mi-6Ya" firstAttribute="leading" secondItem="am9-M3-LTR" secondAttribute="trailing" constant="8" id="cvx-iA-2pC"/>
+                                        <constraint firstItem="am9-M3-LTR" firstAttribute="top" secondItem="rw9-zF-JKb" secondAttribute="top" constant="3" id="tUC-SI-jlB"/>
+                                        <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="Qm4-Mi-6Ya" secondAttribute="trailing" constant="20" symbolic="YES" id="z9P-Ab-6Bh"/>
+                                    </constraints>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="studentName" destination="Qm4-Mi-6Ya" id="phh-LN-R4D"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -106,7 +134,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9am-TE-79p" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2860" y="-375"/>
+            <point key="canvasLocation" x="2860" y="-375.56221889055473"/>
         </scene>
         <!--Item-->
         <scene sceneID="XI6-yN-wLK">
@@ -125,17 +153,31 @@
             </objects>
             <point key="canvasLocation" x="1939" y="409"/>
         </scene>
-        <!--View Controller-->
+        <!--MapVC-->
         <scene sceneID="Jkb-gf-cNb">
             <objects>
-                <viewController id="dxx-aD-KPh" sceneMemberID="viewController">
+                <viewController id="dxx-aD-KPh" customClass="MapVC" customModule="OnTheMap" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="UsV-NQ-n0d">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="sha-HA-aLm">
+                                <rect key="frame" x="0.0" y="64" width="375" height="554"/>
+                            </mapView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="pa3-dL-dQN" firstAttribute="bottom" secondItem="sha-HA-aLm" secondAttribute="bottom" id="PgY-po-ldw"/>
+                            <constraint firstItem="sha-HA-aLm" firstAttribute="top" secondItem="pa3-dL-dQN" secondAttribute="top" id="RBD-U9-gzY"/>
+                            <constraint firstItem="sha-HA-aLm" firstAttribute="leading" secondItem="pa3-dL-dQN" secondAttribute="leading" id="fiT-oe-z9D"/>
+                            <constraint firstItem="pa3-dL-dQN" firstAttribute="trailing" secondItem="sha-HA-aLm" secondAttribute="trailing" id="lnd-0a-iBv"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="pa3-dL-dQN"/>
                     </view>
                     <navigationItem key="navigationItem" id="iFx-ep-3Pb"/>
+                    <connections>
+                        <outlet property="mapView" destination="sha-HA-aLm" id="zEB-GT-Zdo"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aja-a2-vLw" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -159,4 +201,7 @@
             <point key="canvasLocation" x="1912" y="-375"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="icon_pin" width="24" height="24"/>
+    </resources>
 </document>
