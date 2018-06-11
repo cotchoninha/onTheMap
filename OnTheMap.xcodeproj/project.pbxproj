@@ -19,6 +19,7 @@
 		0C9BFADD20C53E5B00F5A25D /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C9BFADC20C53E5B00F5A25D /* LoginVC.swift */; };
 		0C9BFADF20C5684900F5A25D /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C9BFADE20C5684900F5A25D /* Constants.swift */; };
 		0C9EBA5420CE6CD300869032 /* GCDBlackBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C9EBA5320CE6CD300869032 /* GCDBlackBox.swift */; };
+		0C9EBA5620CF29FC00869032 /* AddNewLocationVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C9EBA5520CF29FC00869032 /* AddNewLocationVC.swift */; };
 		21728F2DD47D25D4768039E8 /* Pods_OnTheMap.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F18FAF478888449BB8350CBD /* Pods_OnTheMap.framework */; };
 /* End PBXBuildFile section */
 
@@ -37,6 +38,7 @@
 		0C9BFADC20C53E5B00F5A25D /* LoginVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginVC.swift; sourceTree = "<group>"; };
 		0C9BFADE20C5684900F5A25D /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		0C9EBA5320CE6CD300869032 /* GCDBlackBox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GCDBlackBox.swift; sourceTree = "<group>"; };
+		0C9EBA5520CF29FC00869032 /* AddNewLocationVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewLocationVC.swift; sourceTree = "<group>"; };
 		7C0B73C289981421DA3D9BE6 /* Pods-OnTheMap.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OnTheMap.debug.xcconfig"; path = "Pods/Target Support Files/Pods-OnTheMap/Pods-OnTheMap.debug.xcconfig"; sourceTree = "<group>"; };
 		AB4BBB0F351B9A980D6DE35D /* Pods-OnTheMap.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OnTheMap.release.xcconfig"; path = "Pods/Target Support Files/Pods-OnTheMap/Pods-OnTheMap.release.xcconfig"; sourceTree = "<group>"; };
 		F18FAF478888449BB8350CBD /* Pods_OnTheMap.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_OnTheMap.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -60,6 +62,7 @@
 				0C3F7E1720C9427600A0E39C /* ListOfStudentsViewController.swift */,
 				0C9BFADC20C53E5B00F5A25D /* LoginVC.swift */,
 				0C3F7E0F20C71C8000A0E39C /* MapVC.swift */,
+				0C9EBA5520CF29FC00869032 /* AddNewLocationVC.swift */,
 				0C3F7E1E20CA757700A0E39C /* LocationTableViewCell.swift */,
 			);
 			path = controler;
@@ -245,6 +248,7 @@
 				0C9BFADD20C53E5B00F5A25D /* LoginVC.swift in Sources */,
 				0C9BFADF20C5684900F5A25D /* Constants.swift in Sources */,
 				0C9EBA5420CE6CD300869032 /* GCDBlackBox.swift in Sources */,
+				0C9EBA5620CF29FC00869032 /* AddNewLocationVC.swift in Sources */,
 				0C3F7E1820C9427600A0E39C /* ListOfStudentsViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
