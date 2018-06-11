@@ -12,4 +12,5 @@ class LocationTableViewCell: UITableViewCell{
     
     @IBOutlet weak var studentName: UILabel!
     
+    @IBOutlet weak var studentLink: UILabel!
 }

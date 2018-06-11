@@ -11,15 +11,7 @@ import UIKit
 
 class ListOfStudentsViewController: UITableViewController {
     
-    //primeiro eu vou pegar a localizacao dos students
-    //declara a funcao get
-    //primeiro precisa dos parametros que vao ser usados
-    //cria o request
-    //cria a task
-    
-    var student: Students?
-    
-    var allStudents = [Students]()
+    var allStudents = [Student]()
     
     func getStudendLocation(){
         
@@ -51,38 +43,58 @@ class ListOfStudentsViewController: UITableViewController {
             }
             print("StudentLocation is \(data)")
             
-            let parsedResult: AnyObject!
-            do{
-                parsedResult = try JSONSerialization.jsonObject(with: data, options: .allowFragments) as AnyObject?
-            } catch{
-                sendError("Could not parse the data as JSON: '\(data)'")
-                return
+            if let studentsList = self.parseDataWithCodable(data: data){
+                self.allStudents = studentsList
+                print(studentsList)
             }
-            
-            print("this is my parsedResult \(parsedResult)")
-            //preciso pegar o nome do parsedresult e link
-//            guard let id = parsedResult["id"], let uniqueKey = parsedResult["uniqueKey"], let firstName = parsedResult["firstName"], let lastName = parsedResult["lastName"], let mapString = parsedResult["mapString"], let mediaURL = parsedResult["mediaURL"], let latitude = parsedResult["latitude"], let longitude = parsedResult["longitude"], let createdAt = parsedResult["createdAt"], let updatedAt = parsedResult["updatedAt"] else{
-//                sendError("couldn't data in Students")
-//                return
+            performUIUpdatesOnMain {
+                self.tableView.reloadData()
             }
-            
-            //fazer alguma coisa com o nome
-        print("**MARCELA** fazendo request para studentLocation")
+        }
         task.resume()
     }
     
-    override func viewDidLoad() {
-        getStudendLocation()
+    func parseDataWithCodable(data: Data) -> [Student]? {
+        
+        let jsonDecoder = JSONDecoder()
+        do{
+            let studentsResult = try jsonDecoder.decode(StudentResult.self, from: data)
+            return studentsResult.results
+        } catch{
+            print("Could not parse the data as JSON: '\(data)'")
+            return nil
+        }
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        getStudendLocation()
+        tableView.reloadData()
+    }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+        return allStudents.count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "tableViewCell", for: indexPath) as! LocationTableViewCell
+        let student = self.allStudents[indexPath.row]
+        cell.studentName.text = student.firstName
+        cell.studentLink.text = student.mediaURL
         return cell
+    }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let studentRow = self.allStudents[indexPath.row]
+        guard let studentLink = studentRow.mediaURL else{
+            print("there's no link for this student")
+            return
+        }
+        if let link = URL(string: "\(studentLink)"){
+            UIApplication.shared.open(link, options: [:], completionHandler: nil)
+        }else{
+            print("could not open the link for this student")
+        }
     }
     
     

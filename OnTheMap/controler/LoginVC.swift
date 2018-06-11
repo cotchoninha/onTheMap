@@ -26,6 +26,7 @@ class LoginVC: UIViewController, LoginButtonDelegate{
         switch result {
         case .failed(let error):
             print(error)
+            alert(title: "Sorry! We couldn't access your account.", message: "Check your information again.", buttonMessage: "Try again.")
         case .cancelled:
             print("Cancelled")
         case .success(let grantedPermissions, let declinedPermissions, let accessToken):
@@ -69,11 +70,13 @@ class LoginVC: UIViewController, LoginButtonDelegate{
             /* GUARD: Was there an error? */
             guard (error == nil) else {
                 sendError("There was an error with your request: \(error!)")
+                self.alert(title: "No internet connection.", message: "Your connection seems to be out! Try again later.", buttonMessage: "Try again.")
                 return
             }
             
             /* GUARD: Did we get a successful 2XX response? */
             guard let statusCode = (response as? HTTPURLResponse)?.statusCode, statusCode >= 200 && statusCode <= 299 else {
+                self.alert(title: "Sorry! We couldn't access your account.", message: "Check your information again.", buttonMessage: "Try again.")
                 sendError("Your request returned a status code other than 2xx!")
                 return
             }
@@ -103,6 +106,7 @@ class LoginVC: UIViewController, LoginButtonDelegate{
                 return
             }
             if let sessionID = dictionarySession["id"] as? String{
+                self.completeLogin()
                 print("sessionID: \(sessionID)")
                 DispatchQueue.main.async {
                  (UIApplication.shared.delegate as! AppDelegate).sessionID = sessionID
@@ -110,10 +114,11 @@ class LoginVC: UIViewController, LoginButtonDelegate{
             }else{
                 print("could not find a SessionID.")
             }
+            
+            
         }
         
         task.resume()
-        completeLogin()
         
     }
     
@@ -123,6 +128,16 @@ class LoginVC: UIViewController, LoginButtonDelegate{
         UIApplication.shared.open(udacityWebSite, options: [:], completionHandler: nil)
     }
     
+    func alert(title: String, message: String, buttonMessage: String){
+        // create the alert
+        let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.alert)
+        
+        // add an action (button)
+        alert.addAction(UIAlertAction(title: buttonMessage, style: UIAlertActionStyle.default, handler: nil))
+        
+        // show the alert
+        self.present(alert, animated: true, completion: nil)
+    }
     
 }
 

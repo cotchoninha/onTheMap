@@ -18,6 +18,7 @@
 		0C9BFAD520C2A31600F5A25D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0C9BFAD320C2A31600F5A25D /* LaunchScreen.storyboard */; };
 		0C9BFADD20C53E5B00F5A25D /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C9BFADC20C53E5B00F5A25D /* LoginVC.swift */; };
 		0C9BFADF20C5684900F5A25D /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C9BFADE20C5684900F5A25D /* Constants.swift */; };
+		0C9EBA5420CE6CD300869032 /* GCDBlackBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C9EBA5320CE6CD300869032 /* GCDBlackBox.swift */; };
 		21728F2DD47D25D4768039E8 /* Pods_OnTheMap.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F18FAF478888449BB8350CBD /* Pods_OnTheMap.framework */; };
 /* End PBXBuildFile section */
 
@@ -35,6 +36,7 @@
 		0C9BFAD620C2A31600F5A25D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0C9BFADC20C53E5B00F5A25D /* LoginVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginVC.swift; sourceTree = "<group>"; };
 		0C9BFADE20C5684900F5A25D /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		0C9EBA5320CE6CD300869032 /* GCDBlackBox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GCDBlackBox.swift; sourceTree = "<group>"; };
 		7C0B73C289981421DA3D9BE6 /* Pods-OnTheMap.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OnTheMap.debug.xcconfig"; path = "Pods/Target Support Files/Pods-OnTheMap/Pods-OnTheMap.debug.xcconfig"; sourceTree = "<group>"; };
 		AB4BBB0F351B9A980D6DE35D /* Pods-OnTheMap.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OnTheMap.release.xcconfig"; path = "Pods/Target Support Files/Pods-OnTheMap/Pods-OnTheMap.release.xcconfig"; sourceTree = "<group>"; };
 		F18FAF478888449BB8350CBD /* Pods_OnTheMap.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_OnTheMap.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -86,6 +88,7 @@
 			children = (
 				0C9BFACA20C2A31300F5A25D /* AppDelegate.swift */,
 				0C9BFADE20C5684900F5A25D /* Constants.swift */,
+				0C9EBA5320CE6CD300869032 /* GCDBlackBox.swift */,
 				0C3F7E1D20C9A4DC00A0E39C /* controler */,
 				0C3F7E1B20C97CA800A0E39C /* Students.swift */,
 				0C3F7E1920C9678C00A0E39C /* Methods.swift */,
@@ -241,6 +244,7 @@
 				0C3F7E1C20C97CA800A0E39C /* Students.swift in Sources */,
 				0C9BFADD20C53E5B00F5A25D /* LoginVC.swift in Sources */,
 				0C9BFADF20C5684900F5A25D /* Constants.swift in Sources */,
+				0C9EBA5420CE6CD300869032 /* GCDBlackBox.swift in Sources */,
 				0C3F7E1820C9427600A0E39C /* ListOfStudentsViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -30,7 +30,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" textContentType="password"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="e2W-Y6-7KU">
                                 <rect key="frame" x="168" y="241" width="38" height="30"/>
@@ -103,24 +103,33 @@
                                             </constraints>
                                         </imageView>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="student name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qm4-Mi-6Ya">
-                                            <rect key="frame" x="60" y="3" width="105.5" height="36"/>
+                                            <rect key="frame" x="60" y="3" width="299" height="21"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="link" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SeH-9u-dne">
+                                            <rect key="frame" x="60" y="24.5" width="299" height="15"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
                                     <constraints>
-                                        <constraint firstItem="Qm4-Mi-6Ya" firstAttribute="top" secondItem="rw9-zF-JKb" secondAttribute="top" constant="3" id="168-ZC-hoS"/>
                                         <constraint firstAttribute="bottom" secondItem="am9-M3-LTR" secondAttribute="bottom" constant="4.5" id="4G3-4s-3YR"/>
-                                        <constraint firstAttribute="bottom" secondItem="Qm4-Mi-6Ya" secondAttribute="bottom" constant="4.5" id="80x-ow-HO8"/>
+                                        <constraint firstAttribute="trailing" secondItem="SeH-9u-dne" secondAttribute="trailing" constant="16" id="7K2-iH-jGd"/>
+                                        <constraint firstItem="Qm4-Mi-6Ya" firstAttribute="top" secondItem="rw9-zF-JKb" secondAttribute="top" constant="3" id="GsT-Qj-eZh"/>
+                                        <constraint firstAttribute="trailing" secondItem="Qm4-Mi-6Ya" secondAttribute="trailing" constant="16" id="HU2-lW-cO1"/>
+                                        <constraint firstItem="SeH-9u-dne" firstAttribute="leading" secondItem="am9-M3-LTR" secondAttribute="trailing" constant="8" id="NO6-qE-EHt"/>
+                                        <constraint firstItem="Qm4-Mi-6Ya" firstAttribute="leading" secondItem="am9-M3-LTR" secondAttribute="trailing" constant="8" id="Xi1-mF-A4X"/>
                                         <constraint firstItem="am9-M3-LTR" firstAttribute="leading" secondItem="rw9-zF-JKb" secondAttribute="leading" constant="16" id="Y3h-y4-Je4"/>
                                         <constraint firstItem="am9-M3-LTR" firstAttribute="leading" secondItem="rw9-zF-JKb" secondAttribute="leading" constant="16" id="aFe-Kv-0fj"/>
-                                        <constraint firstItem="Qm4-Mi-6Ya" firstAttribute="leading" secondItem="am9-M3-LTR" secondAttribute="trailing" constant="8" id="cvx-iA-2pC"/>
+                                        <constraint firstAttribute="bottom" secondItem="SeH-9u-dne" secondAttribute="bottom" constant="4" id="jO4-1P-FkF"/>
                                         <constraint firstItem="am9-M3-LTR" firstAttribute="top" secondItem="rw9-zF-JKb" secondAttribute="top" constant="3" id="tUC-SI-jlB"/>
-                                        <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="Qm4-Mi-6Ya" secondAttribute="trailing" constant="20" symbolic="YES" id="z9P-Ab-6Bh"/>
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
+                                    <outlet property="studentLink" destination="SeH-9u-dne" id="WpP-Xd-p0n"/>
                                     <outlet property="studentName" destination="Qm4-Mi-6Ya" id="phh-LN-R4D"/>
                                 </connections>
                             </tableViewCell>

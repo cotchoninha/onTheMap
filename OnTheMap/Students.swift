@@ -7,19 +7,25 @@
 //
 
 import Foundation
+import UIKit
 
-struct Students {
+struct Student: Codable {
     
-    var id: String?
-    var uniqueKey: String?
-    var firstName: String?
-    var lastName: String?
-    var mapString: String?
-    var mediaURL: String?
+    static var allStudents = [Student]()
+    
+    var objectId: String?
     var latitude: Float?
+    var mapString: String?
+    var uniqueKey: String?
+    var lastName: String?
+    var firstName: String?
     var longitude: Float?
-    var createdAt: Date?
-    var updatedAt: Date?
+    var mediaURL: String?
+    var createdAt: String?
+    var updatedAt: String?
     
-    
+}
+
+struct StudentResult: Codable {
+    var results: [Student]?
 }
