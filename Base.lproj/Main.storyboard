@@ -93,10 +93,22 @@
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                             <items>
                                 <navigationItem title="On The Map" id="vF8-8w-UAI">
-                                    <barButtonItem key="leftBarButtonItem" title="Logout" id="90g-Vm-GyJ"/>
+                                    <barButtonItem key="leftBarButtonItem" title="Logout" id="90g-Vm-GyJ">
+                                        <connections>
+                                            <action selector="logoutButton:" destination="Jaj-Ez-pm6" id="8z1-c3-HNC"/>
+                                        </connections>
+                                    </barButtonItem>
                                     <rightBarButtonItems>
-                                        <barButtonItem systemItem="add" id="zT2-KA-1C8"/>
-                                        <barButtonItem systemItem="refresh" id="dmo-JB-VQa"/>
+                                        <barButtonItem systemItem="add" id="zT2-KA-1C8">
+                                            <connections>
+                                                <action selector="addButton:" destination="Jaj-Ez-pm6" id="1sA-TK-bR2"/>
+                                            </connections>
+                                        </barButtonItem>
+                                        <barButtonItem systemItem="refresh" id="dmo-JB-VQa">
+                                            <connections>
+                                                <action selector="refreshButton:" destination="Jaj-Ez-pm6" id="es5-U6-dat"/>
+                                            </connections>
+                                        </barButtonItem>
                                     </rightBarButtonItems>
                                 </navigationItem>
                             </items>

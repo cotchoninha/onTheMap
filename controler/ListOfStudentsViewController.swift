@@ -13,6 +13,10 @@ class ListOfStudentsViewController: UITableViewController {
     
     var allStudents = [Student]()
     
+//    func checkForErrors(){
+//        
+//    }
+    
     func getStudendLocation(){
         
         var request = URLRequest(url: URL(string: "https://parse.udacity.com/parse/classes/StudentLocation?limit=100&order=-updatedAt")!)
@@ -97,5 +101,37 @@ class ListOfStudentsViewController: UITableViewController {
         }
     }
     
+//    @IBAction func logoutButton(_ sender: Any) {
+//        //checar se está logado com a udacity ou facebook e fazer logoff por um destes
+//        var request = URLRequest(url: URL(string: "https://www.udacity.com/api/session")!)
+//        request.httpMethod = "DELETE"
+//        var xsrfCookie: HTTPCookie? = nil
+//        let sharedCookieStorage = HTTPCookieStorage.shared
+//        for cookie in sharedCookieStorage.cookies! {
+//            if cookie.name == "XSRF-TOKEN" { xsrfCookie = cookie }
+//        }
+//        if let xsrfCookie = xsrfCookie {
+//            request.setValue(xsrfCookie.value, forHTTPHeaderField: "X-XSRF-TOKEN")
+//        }
+//        let session = URLSession.shared
+//        let task = session.dataTask(with: request) { data, response, error in
+//            if error != nil { // Handle error…
+//                return
+//            }
+//            let range = Range(5..<data!.count)
+//            let newData = data?.subdata(in: range) /* subset response data! */
+//            print(String(data: newData!, encoding: .utf8)!)
+//        }
+//        task.resume()
+//
+//    }
+//
+//    @IBAction func refreshButton(_ sender: Any) {
+//        getStudendLocation()
+//    }
+//
+//
+//    @IBAction func addButton(_ sender: Any) {
+//    }
     
 }
