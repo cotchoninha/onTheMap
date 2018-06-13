@@ -199,7 +199,6 @@
                                 <state key="normal" title="FIND LOCATION"/>
                                 <connections>
                                     <action selector="findLocationButton:" destination="FO1-Dj-F1n" eventType="touchUpInside" id="uYS-ip-OYM"/>
-                                    <segue destination="KK3-Xb-sVQ" kind="show" id="pil-9B-fqK"/>
                                 </connections>
                             </button>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="uGu-nk-BFu">
@@ -247,10 +246,10 @@
             </objects>
             <point key="canvasLocation" x="3791.1999999999998" y="-181.25937031484258"/>
         </scene>
-        <!--View Controller-->
+        <!--Add Map View Controller-->
         <scene sceneID="htl-6Q-RBC">
             <objects>
-                <viewController id="KK3-Xb-sVQ" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="AddMap" id="KK3-Xb-sVQ" customClass="AddMapViewController" customModule="OnTheMap" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Y6E-ki-Hdq">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -261,12 +260,19 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VSa-n7-Mij">
                                 <rect key="frame" x="20" y="586" width="335" height="30"/>
                                 <state key="normal" title="Button"/>
+                                <connections>
+                                    <action selector="submitLocationButton:" destination="KK3-Xb-sVQ" eventType="touchUpInside" id="9Sg-4E-NkU"/>
+                                </connections>
                             </button>
-                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="upW-Ne-KfN">
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gZy-26-XaS">
                                 <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                                 <items>
-                                    <navigationItem title="Title" id="nK4-FY-g4q">
-                                        <barButtonItem key="leftBarButtonItem" title="Add Location" id="ucP-uW-jiK"/>
+                                    <navigationItem title="Title" id="ca2-89-bM7">
+                                        <barButtonItem key="leftBarButtonItem" title="Add Location" id="H45-XZ-TEn">
+                                            <connections>
+                                                <action selector="backButton:" destination="KK3-Xb-sVQ" id="DUF-ny-SbK"/>
+                                            </connections>
+                                        </barButtonItem>
                                     </navigationItem>
                                 </items>
                             </navigationBar>
@@ -274,18 +280,21 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="EBY-4U-26B" firstAttribute="trailing" secondItem="j0B-6y-LNf" secondAttribute="trailing" id="0Rz-xX-vT5"/>
+                            <constraint firstItem="gZy-26-XaS" firstAttribute="trailing" secondItem="EBY-4U-26B" secondAttribute="trailing" id="1IK-xt-6T0"/>
                             <constraint firstItem="j0B-6y-LNf" firstAttribute="leading" secondItem="EBY-4U-26B" secondAttribute="leading" id="2UH-Mf-Yds"/>
-                            <constraint firstItem="upW-Ne-KfN" firstAttribute="trailing" secondItem="EBY-4U-26B" secondAttribute="trailing" id="9pl-CE-z4P"/>
                             <constraint firstItem="VSa-n7-Mij" firstAttribute="leading" secondItem="EBY-4U-26B" secondAttribute="leading" constant="20" id="Cti-2Y-cXR"/>
                             <constraint firstItem="j0B-6y-LNf" firstAttribute="top" secondItem="EBY-4U-26B" secondAttribute="top" constant="44" id="Jn8-Vz-Ivv"/>
-                            <constraint firstItem="upW-Ne-KfN" firstAttribute="leading" secondItem="EBY-4U-26B" secondAttribute="leading" id="M7T-lE-yai"/>
                             <constraint firstItem="EBY-4U-26B" firstAttribute="bottom" secondItem="VSa-n7-Mij" secondAttribute="bottom" constant="51" id="S9l-GU-ZVm"/>
-                            <constraint firstItem="upW-Ne-KfN" firstAttribute="top" secondItem="EBY-4U-26B" secondAttribute="top" id="oQ5-Iq-n47"/>
+                            <constraint firstItem="gZy-26-XaS" firstAttribute="leading" secondItem="EBY-4U-26B" secondAttribute="leading" id="aFj-ic-ggq"/>
                             <constraint firstItem="EBY-4U-26B" firstAttribute="trailing" secondItem="VSa-n7-Mij" secondAttribute="trailing" constant="20" id="qEZ-86-hC2"/>
+                            <constraint firstItem="gZy-26-XaS" firstAttribute="top" secondItem="EBY-4U-26B" secondAttribute="top" id="wXH-yS-Ify"/>
                             <constraint firstItem="EBY-4U-26B" firstAttribute="bottom" secondItem="j0B-6y-LNf" secondAttribute="bottom" id="xsB-5k-4ei"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="EBY-4U-26B"/>
                     </view>
+                    <connections>
+                        <outlet property="mapView" destination="j0B-6y-LNf" id="bpd-19-qtJ"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PbP-ZZ-Mr0" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -309,7 +318,11 @@
                                     <navigationItem title="On The Map" id="vQa-M8-vWP">
                                         <barButtonItem key="leftBarButtonItem" title="Logout" id="76e-Je-KY1"/>
                                         <rightBarButtonItems>
-                                            <barButtonItem systemItem="add" id="dTK-qA-f4V"/>
+                                            <barButtonItem systemItem="add" id="dTK-qA-f4V">
+                                                <connections>
+                                                    <segue destination="FO1-Dj-F1n" kind="presentation" id="SZP-WD-ZKe"/>
+                                                </connections>
+                                            </barButtonItem>
                                             <barButtonItem systemItem="refresh" id="d0Q-7P-NXK"/>
                                         </rightBarButtonItems>
                                     </navigationItem>
@@ -339,4 +352,7 @@
     <resources>
         <image name="icon_pin" width="24" height="24"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="SZP-WD-ZKe"/>
+    </inferredMetricsTieBreakers>
 </document>

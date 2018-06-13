@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0C015AB920D180460028CA68 /* AddMapVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C015AB820D180460028CA68 /* AddMapVC.swift */; };
 		0C3F7E1020C71C8000A0E39C /* MapVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C3F7E0F20C71C8000A0E39C /* MapVC.swift */; };
 		0C3F7E1820C9427600A0E39C /* ListOfStudentsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C3F7E1720C9427600A0E39C /* ListOfStudentsViewController.swift */; };
 		0C3F7E1A20C9678C00A0E39C /* Methods.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C3F7E1920C9678C00A0E39C /* Methods.swift */; };
@@ -24,6 +25,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0C015AB820D180460028CA68 /* AddMapVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddMapVC.swift; sourceTree = "<group>"; };
 		0C3F7E0F20C71C8000A0E39C /* MapVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapVC.swift; sourceTree = "<group>"; };
 		0C3F7E1720C9427600A0E39C /* ListOfStudentsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListOfStudentsViewController.swift; sourceTree = "<group>"; };
 		0C3F7E1920C9678C00A0E39C /* Methods.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Methods.swift; sourceTree = "<group>"; };
@@ -62,6 +64,7 @@
 				0C3F7E1720C9427600A0E39C /* ListOfStudentsViewController.swift */,
 				0C9BFADC20C53E5B00F5A25D /* LoginVC.swift */,
 				0C3F7E0F20C71C8000A0E39C /* MapVC.swift */,
+				0C015AB820D180460028CA68 /* AddMapVC.swift */,
 				0C9EBA5520CF29FC00869032 /* AddNewLocationVC.swift */,
 				0C3F7E1E20CA757700A0E39C /* LocationTableViewCell.swift */,
 			);
@@ -249,6 +252,7 @@
 				0C9BFADF20C5684900F5A25D /* Constants.swift in Sources */,
 				0C9EBA5420CE6CD300869032 /* GCDBlackBox.swift in Sources */,
 				0C9EBA5620CF29FC00869032 /* AddNewLocationVC.swift in Sources */,
+				0C015AB920D180460028CA68 /* AddMapVC.swift in Sources */,
 				0C3F7E1820C9427600A0E39C /* ListOfStudentsViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

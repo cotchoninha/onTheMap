@@ -110,8 +110,6 @@ class MapVC: UIViewController, MKMapViewDelegate{
                 annotations.append(annotation)
                 
             }
-            
-          
         }
         self.mapView.addAnnotations(annotations)
     }
