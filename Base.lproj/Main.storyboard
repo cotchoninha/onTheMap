@@ -102,7 +102,7 @@
                                         <barButtonItem systemItem="add" id="zT2-KA-1C8">
                                             <connections>
                                                 <action selector="addButton:" destination="Jaj-Ez-pm6" id="1sA-TK-bR2"/>
-                                                <segue destination="FO1-Dj-F1n" kind="show" id="yvx-6b-L0o"/>
+                                                <segue destination="FO1-Dj-F1n" kind="presentation" id="yvx-6b-L0o"/>
                                             </connections>
                                         </barButtonItem>
                                         <barButtonItem systemItem="refresh" id="dmo-JB-VQa">
@@ -194,11 +194,12 @@
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6ah-Tj-hHb">
-                                <rect key="frame" x="132" y="318.5" width="111" height="30"/>
+                                <rect key="frame" x="132" y="319" width="111" height="30"/>
                                 <color key="tintColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <state key="normal" title="FIND LOCATION"/>
                                 <connections>
                                     <action selector="findLocationButton:" destination="FO1-Dj-F1n" eventType="touchUpInside" id="uYS-ip-OYM"/>
+                                    <segue destination="KK3-Xb-sVQ" kind="show" id="pil-9B-fqK"/>
                                 </connections>
                             </button>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="uGu-nk-BFu">
@@ -245,6 +246,50 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ohf-Go-PtS" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3791.1999999999998" y="-181.25937031484258"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="htl-6Q-RBC">
+            <objects>
+                <viewController id="KK3-Xb-sVQ" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Y6E-ki-Hdq">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="j0B-6y-LNf">
+                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                            </mapView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VSa-n7-Mij">
+                                <rect key="frame" x="20" y="586" width="335" height="30"/>
+                                <state key="normal" title="Button"/>
+                            </button>
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="upW-Ne-KfN">
+                                <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                                <items>
+                                    <navigationItem title="Title" id="nK4-FY-g4q">
+                                        <barButtonItem key="leftBarButtonItem" title="Add Location" id="ucP-uW-jiK"/>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="EBY-4U-26B" firstAttribute="trailing" secondItem="j0B-6y-LNf" secondAttribute="trailing" id="0Rz-xX-vT5"/>
+                            <constraint firstItem="j0B-6y-LNf" firstAttribute="leading" secondItem="EBY-4U-26B" secondAttribute="leading" id="2UH-Mf-Yds"/>
+                            <constraint firstItem="upW-Ne-KfN" firstAttribute="trailing" secondItem="EBY-4U-26B" secondAttribute="trailing" id="9pl-CE-z4P"/>
+                            <constraint firstItem="VSa-n7-Mij" firstAttribute="leading" secondItem="EBY-4U-26B" secondAttribute="leading" constant="20" id="Cti-2Y-cXR"/>
+                            <constraint firstItem="j0B-6y-LNf" firstAttribute="top" secondItem="EBY-4U-26B" secondAttribute="top" constant="44" id="Jn8-Vz-Ivv"/>
+                            <constraint firstItem="upW-Ne-KfN" firstAttribute="leading" secondItem="EBY-4U-26B" secondAttribute="leading" id="M7T-lE-yai"/>
+                            <constraint firstItem="EBY-4U-26B" firstAttribute="bottom" secondItem="VSa-n7-Mij" secondAttribute="bottom" constant="51" id="S9l-GU-ZVm"/>
+                            <constraint firstItem="upW-Ne-KfN" firstAttribute="top" secondItem="EBY-4U-26B" secondAttribute="top" id="oQ5-Iq-n47"/>
+                            <constraint firstItem="EBY-4U-26B" firstAttribute="trailing" secondItem="VSa-n7-Mij" secondAttribute="trailing" constant="20" id="qEZ-86-hC2"/>
+                            <constraint firstItem="EBY-4U-26B" firstAttribute="bottom" secondItem="j0B-6y-LNf" secondAttribute="bottom" id="xsB-5k-4ei"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="EBY-4U-26B"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="PbP-ZZ-Mr0" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4760.8000000000002" y="-181.25937031484258"/>
         </scene>
         <!--Item-->
         <scene sceneID="Jkb-gf-cNb">

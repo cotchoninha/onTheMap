@@ -20,6 +20,7 @@ class AddNewLocationVC: UIViewController {
     @IBOutlet weak var linkTextField: UITextField!
     
     @IBAction func findLocationButton(_ sender: Any) {
+        
     }
     
 }
