@@ -34,9 +34,13 @@ class AddNewLocationVC: UIViewController {
     @IBOutlet weak var linkTextField: UITextField!
     
     @IBAction func findLocationButton(_ sender: Any) {
-        
+        locationTextField.text = "London"
+        linkTextField.text = "www.udacity.com"
         if locationTextField.text == "" || locationTextField.text == nil{
             alert(title: "INVALID LOCATION", message: "Please, enter a valid location", buttonMessage: "Ok!")
+        }else if linkTextField.text == ""{
+            //checar se é o link URL
+            self.alert(title: "INVALID LINK", message: "Please, enter a valid link", buttonMessage: "Ok!")
         }else{
             let locationString = locationTextField.text
             let geocoder = CLGeocoder()
@@ -55,6 +59,8 @@ class AddNewLocationVC: UIViewController {
                         annotation.title = locationString
                         let controller = self.storyboard!.instantiateViewController(withIdentifier: "AddMap") as! AddMapViewController
                         controller.locationAnnotation = annotation
+                        controller.locationString = locationString
+                        controller.userLink = self.linkTextField.text
                         self.present(controller, animated: true, completion: nil)
                     }
                 }

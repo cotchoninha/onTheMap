@@ -29,3 +29,21 @@ struct Student: Codable {
 struct StudentResult: Codable {
     var results: [Student]?
 }
+
+struct UserKey: Codable{
+    var user: User?
+}
+
+struct User: Codable{
+    var first_name: String?
+    var last_name: String?
+    var key: String?
+}
+
+struct PostNewLocation: Codable{
+    var createdAt: String?
+    var objectId: String?
+}
+//criar uma struct vou ter uma var user: User
+//criar uma struct para o meu tipo user
+

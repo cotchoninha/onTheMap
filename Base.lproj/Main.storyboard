@@ -303,7 +303,7 @@
         <!--Item-->
         <scene sceneID="Jkb-gf-cNb">
             <objects>
-                <viewController id="dxx-aD-KPh" customClass="MapVC" customModule="OnTheMap" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MapVC" id="dxx-aD-KPh" customClass="MapVC" customModule="OnTheMap" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="UsV-NQ-n0d">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

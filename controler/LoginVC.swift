@@ -14,6 +14,7 @@ import FacebookCore
 
 class LoginVC: UIViewController, LoginButtonDelegate{
     
+    
     func loginButtonDidLogOut(_ loginButton: LoginButton) {
         print("logOut")
     }
@@ -101,16 +102,19 @@ class LoginVC: UIViewController, LoginButtonDelegate{
                 return
             }
             
-            guard let dictionarySession = parsedResult["session"] else{
+            guard let dictionarySession = parsedResult["session"], let dictionaryAccount = parsedResult["account"] else{
                 sendError("Cannot find keys 'session' in \(parsedResult)")
                 return
             }
-            if let sessionID = dictionarySession["id"] as? String{
+            if let sessionID = dictionarySession["id"] as? String, let keyAccount = dictionaryAccount["key"] as? String{
                 self.completeLogin()
-                print("sessionID: \(sessionID)")
-                DispatchQueue.main.async {
-                 (UIApplication.shared.delegate as! AppDelegate).sessionID = sessionID
-                }
+                print("MARCELA - sessionID: \(sessionID) and accountKey: \(keyAccount)")
+                (UIApplication.shared.delegate as! AppDelegate).sessionID = sessionID
+                (UIApplication.shared.delegate as! AppDelegate).keyAccount = keyAccount
+//                DispatchQueue.main.async {
+//                    (UIApplication.shared.delegate as! AppDelegate).sessionID = sessionID
+//                    (UIApplication.shared.delegate as! AppDelegate).keyAccount = keyAccount
+//                }
             }else{
                 print("could not find a SessionID.")
             }
