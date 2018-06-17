@@ -14,6 +14,8 @@ import FacebookCore
 
 class LoginVC: UIViewController, LoginButtonDelegate{
     
+    let methods = Methods()
+    
     
     func loginButtonDidLogOut(_ loginButton: LoginButton) {
         print("logOut")
@@ -27,12 +29,77 @@ class LoginVC: UIViewController, LoginButtonDelegate{
         switch result {
         case .failed(let error):
             print(error)
-            alert(title: "Sorry! We couldn't access your account.", message: "Check your information again.", buttonMessage: "Try again.")
+            methods.alert(title: "Sorry! We couldn't access your account.", message: "Check your information again.", buttonMessage: "Try again.", viewController: self)
         case .cancelled:
             print("Cancelled")
         case .success(let grantedPermissions, let declinedPermissions, let accessToken):
             print("Logged In")
-            completeLogin()
+            var request = URLRequest(url: URL(string: "https://www.udacity.com/api/session")!)
+            
+            request.httpMethod = "POST"
+            request.addValue("application/json", forHTTPHeaderField: "Accept")
+            request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+//            request.httpBody = "{\"facebook_mobile\": {\"access_token\": \"\(accessToken);\"}}".data(using: .utf8)
+            request.httpBody = "{\"facebook_mobile\": {\"access_token\": \"\(accessToken.authenticationToken)\"}}".data(using: .utf8)
+            
+            let task = URLSession.shared.dataTask(with: request) { data, response, error in
+                
+                func sendError(_ error: String) {
+                    print(error)
+                }
+                
+                /* GUARD: Was there an error? */
+                guard (error == nil) else {
+                    sendError("There was an error with your request: \(error!)")
+                    self.methods.alert(title: "No internet connection.", message: "Your connection seems to be out! Try again later.", buttonMessage: "Try again.", viewController: self)
+                    return
+                }
+                
+                /* GUARD: Did we get a successful 2XX response? */
+                guard let statusCode = (response as? HTTPURLResponse)?.statusCode, statusCode >= 200 && statusCode <= 299 else {
+                    self.methods.alert(title: "Sorry! We couldn't access your account.", message: "Check your information again.", buttonMessage: "Try again.", viewController: self)
+                    sendError("Your request returned a status code other than 2xx!")
+                    return
+                }
+                
+                /* GUARD: Was there any data returned? */
+                guard let data = data else {
+                    sendError("No data was returned by the request!")
+                    return
+                }
+                
+                let range = Range(5..<data.count)
+                let newData = data.subdata(in: range) /* subset response data! */
+                print("AQUI COMECA A IMPRIMIR O DATA!!!!")
+                print(String(data: newData, encoding: .utf8)!)
+                
+                /* 5. Parse the data */
+                let parsedResult: [String:AnyObject]!
+                do{
+                    parsedResult = try JSONSerialization.jsonObject(with: newData, options: .allowFragments) as? [String:AnyObject]
+                } catch{
+                    sendError("Could not parse the data as JSON: '\(newData)'")
+                    return
+                }
+                
+                guard let dictionarySession = parsedResult["session"], let dictionaryAccount = parsedResult["account"] else{
+                    sendError("Cannot find keys 'session' in \(parsedResult)")
+                    return
+                }
+                if let sessionID = dictionarySession["id"] as? String, let keyAccount = dictionaryAccount["key"] as? String{
+                    print("MARCELA - sessionID: \(sessionID) and accountKey: \(keyAccount)")
+                    performUIUpdatesOnMain {
+                        (UIApplication.shared.delegate as! AppDelegate).sessionID = sessionID
+                        (UIApplication.shared.delegate as! AppDelegate).keyAccount = keyAccount
+                        self.completeLogin()
+                    }
+                    
+                }else{
+                    print("could not find a SessionID.")
+                }
+            }
+            task.resume()
+            
         }
         
     }
@@ -52,7 +119,7 @@ class LoginVC: UIViewController, LoginButtonDelegate{
     
     @IBAction func loginButton(_ sender: Any) {
         
-        usernameTextField.text = "cotchoninha@yahoo.com.br"
+        usernameTextField.text = "cotchninha@yahoo.com.br"
         passwordTextField.text = "lulu1234"
         
         var request = URLRequest(url: URL(string: "https://www.udacity.com/api/session")!)
@@ -71,13 +138,13 @@ class LoginVC: UIViewController, LoginButtonDelegate{
             /* GUARD: Was there an error? */
             guard (error == nil) else {
                 sendError("There was an error with your request: \(error!)")
-                self.alert(title: "No internet connection.", message: "Your connection seems to be out! Try again later.", buttonMessage: "Try again.")
+                self.methods.alert(title: "No internet connection.", message: "Your connection seems to be out! Try again later.", buttonMessage: "Try again.", viewController: self)
                 return
             }
             
             /* GUARD: Did we get a successful 2XX response? */
             guard let statusCode = (response as? HTTPURLResponse)?.statusCode, statusCode >= 200 && statusCode <= 299 else {
-                self.alert(title: "Sorry! We couldn't access your account.", message: "Check your information again.", buttonMessage: "Try again.")
+                self.methods.alert(title: "Sorry! We couldn't access your account.", message: "Check your information again.", buttonMessage: "Try again.", viewController: self)
                 sendError("Your request returned a status code other than 2xx!")
                 return
             }
@@ -111,10 +178,6 @@ class LoginVC: UIViewController, LoginButtonDelegate{
                 print("MARCELA - sessionID: \(sessionID) and accountKey: \(keyAccount)")
                 (UIApplication.shared.delegate as! AppDelegate).sessionID = sessionID
                 (UIApplication.shared.delegate as! AppDelegate).keyAccount = keyAccount
-//                DispatchQueue.main.async {
-//                    (UIApplication.shared.delegate as! AppDelegate).sessionID = sessionID
-//                    (UIApplication.shared.delegate as! AppDelegate).keyAccount = keyAccount
-//                }
             }else{
                 print("could not find a SessionID.")
             }
@@ -132,16 +195,16 @@ class LoginVC: UIViewController, LoginButtonDelegate{
         UIApplication.shared.open(udacityWebSite, options: [:], completionHandler: nil)
     }
     
-    func alert(title: String, message: String, buttonMessage: String){
-        // create the alert
-        let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.alert)
-        
-        // add an action (button)
-        alert.addAction(UIAlertAction(title: buttonMessage, style: UIAlertActionStyle.default, handler: nil))
-        
-        // show the alert
-        self.present(alert, animated: true, completion: nil)
-    }
+//    func alert(title: String, message: String, buttonMessage: String){
+//        // create the alert
+//        let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.alert)
+//        
+//        // add an action (button)
+//        alert.addAction(UIAlertAction(title: buttonMessage, style: UIAlertActionStyle.default, handler: nil))
+//        
+//        // show the alert
+//        self.present(alert, animated: true, completion: nil)
+//    }
     
 }
 

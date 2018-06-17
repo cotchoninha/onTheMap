@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import CoreLocation
 
 struct Student: Codable {
     
@@ -44,6 +45,14 @@ struct PostNewLocation: Codable{
     var createdAt: String?
     var objectId: String?
 }
-//criar uma struct vou ter uma var user: User
-//criar uma struct para o meu tipo user
+
+struct PostLocationDataHTTPBody: Encodable{
+    var uniqueKey: String
+    var firstName: String
+    var lastName: String
+    var mapString: String
+    var mediaURL: String
+    var latitude: CLLocationDegrees
+    var longitude: CLLocationDegrees
+}
 

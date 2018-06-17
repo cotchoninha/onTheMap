@@ -16,5 +16,8 @@ struct Constants {
     static let ApiKey = "QuWThTdiRmTux3YaDseUSEpUKo7aBYM737yKd4gY"
     static let ParseApplicationID = "QrX47CA9cyuGewLdsL7o5Eb8iug6Em8ye0dnAbIr"
     //session
+    static let UdacityAPISessionURL = "https://www.udacity.com/api/session"
+    static let HttpMethod = "POST"
+    static let SignInURL = "https://www.udacity.com/account/auth#!/signup"
     
 }
