@@ -8,9 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		0C015AB920D180460028CA68 /* MapAddLocationVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C015AB820D180460028CA68 /* MapAddLocationVC.swift */; };
+		0C07552420D684AC00B2652E /* UdacityAPIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C07552320D684AC00B2652E /* UdacityAPIClient.swift */; };
 		0C3F7E1020C71C8000A0E39C /* MapVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C3F7E0F20C71C8000A0E39C /* MapVC.swift */; };
 		0C3F7E1820C9427600A0E39C /* ListOfStudentsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C3F7E1720C9427600A0E39C /* ListOfStudentsViewController.swift */; };
-		0C3F7E1A20C9678C00A0E39C /* Methods.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C3F7E1920C9678C00A0E39C /* Methods.swift */; };
+		0C3F7E1A20C9678C00A0E39C /* UserAlertManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C3F7E1920C9678C00A0E39C /* UserAlertManager.swift */; };
 		0C3F7E1C20C97CA800A0E39C /* Structs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C3F7E1B20C97CA800A0E39C /* Structs.swift */; };
 		0C3F7E1F20CA757700A0E39C /* LocationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C3F7E1E20CA757700A0E39C /* LocationTableViewCell.swift */; };
 		0C9BFACB20C2A31300F5A25D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C9BFACA20C2A31300F5A25D /* AppDelegate.swift */; };
@@ -26,9 +27,10 @@
 
 /* Begin PBXFileReference section */
 		0C015AB820D180460028CA68 /* MapAddLocationVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapAddLocationVC.swift; sourceTree = "<group>"; };
+		0C07552320D684AC00B2652E /* UdacityAPIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UdacityAPIClient.swift; sourceTree = "<group>"; };
 		0C3F7E0F20C71C8000A0E39C /* MapVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapVC.swift; sourceTree = "<group>"; };
 		0C3F7E1720C9427600A0E39C /* ListOfStudentsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListOfStudentsViewController.swift; sourceTree = "<group>"; };
-		0C3F7E1920C9678C00A0E39C /* Methods.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Methods.swift; sourceTree = "<group>"; };
+		0C3F7E1920C9678C00A0E39C /* UserAlertManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAlertManager.swift; sourceTree = "<group>"; };
 		0C3F7E1B20C97CA800A0E39C /* Structs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Structs.swift; sourceTree = "<group>"; };
 		0C3F7E1E20CA757700A0E39C /* LocationTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationTableViewCell.swift; sourceTree = "<group>"; };
 		0C9BFAC720C2A31300F5A25D /* OnTheMap.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OnTheMap.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -62,6 +64,7 @@
 			isa = PBXGroup;
 			children = (
 				0C3F7E1B20C97CA800A0E39C /* Structs.swift */,
+				0C07552320D684AC00B2652E /* UdacityAPIClient.swift */,
 			);
 			path = model;
 			sourceTree = "<group>";
@@ -105,7 +108,7 @@
 				0C9BFACA20C2A31300F5A25D /* AppDelegate.swift */,
 				0C9BFADE20C5684900F5A25D /* Constants.swift */,
 				0C9EBA5320CE6CD300869032 /* GCDBlackBox.swift */,
-				0C3F7E1920C9678C00A0E39C /* Methods.swift */,
+				0C3F7E1920C9678C00A0E39C /* UserAlertManager.swift */,
 				0C015ABA20D2ED510028CA68 /* model */,
 				0C9BFAD120C2A31600F5A25D /* Assets.xcassets */,
 				0C9BFAD320C2A31600F5A25D /* LaunchScreen.storyboard */,
@@ -254,8 +257,9 @@
 				0C9BFACB20C2A31300F5A25D /* AppDelegate.swift in Sources */,
 				0C3F7E1020C71C8000A0E39C /* MapVC.swift in Sources */,
 				0C3F7E1F20CA757700A0E39C /* LocationTableViewCell.swift in Sources */,
-				0C3F7E1A20C9678C00A0E39C /* Methods.swift in Sources */,
+				0C3F7E1A20C9678C00A0E39C /* UserAlertManager.swift in Sources */,
 				0C3F7E1C20C97CA800A0E39C /* Structs.swift in Sources */,
+				0C07552420D684AC00B2652E /* UdacityAPIClient.swift in Sources */,
 				0C9BFADD20C53E5B00F5A25D /* LoginVC.swift in Sources */,
 				0C9BFADF20C5684900F5A25D /* Constants.swift in Sources */,
 				0C9EBA5420CE6CD300869032 /* GCDBlackBox.swift in Sources */,

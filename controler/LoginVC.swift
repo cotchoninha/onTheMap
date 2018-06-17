@@ -14,8 +14,7 @@ import FacebookCore
 
 class LoginVC: UIViewController, LoginButtonDelegate{
     
-    let methods = Methods()
-    
+    let udacityClient = UdacityAPIClient()
     
     func loginButtonDidLogOut(_ loginButton: LoginButton) {
         print("logOut")
@@ -29,7 +28,7 @@ class LoginVC: UIViewController, LoginButtonDelegate{
         switch result {
         case .failed(let error):
             print(error)
-            methods.alert(title: "Sorry! We couldn't access your account.", message: "Check your information again.", buttonMessage: "Try again.", viewController: self)
+            UserAlertManager.showAlert(title: "Sorry! We couldn't access your account.", message: "Check your information again.", buttonMessage: "Try again.", viewController: self)
         case .cancelled:
             print("Cancelled")
         case .success(let grantedPermissions, let declinedPermissions, let accessToken):
@@ -51,13 +50,13 @@ class LoginVC: UIViewController, LoginButtonDelegate{
                 /* GUARD: Was there an error? */
                 guard (error == nil) else {
                     sendError("There was an error with your request: \(error!)")
-                    self.methods.alert(title: "No internet connection.", message: "Your connection seems to be out! Try again later.", buttonMessage: "Try again.", viewController: self)
+                    UserAlertManager.showAlert(title: "No internet connection.", message: "Your connection seems to be out! Try again later.", buttonMessage: "Try again.", viewController: self)
                     return
                 }
                 
                 /* GUARD: Did we get a successful 2XX response? */
                 guard let statusCode = (response as? HTTPURLResponse)?.statusCode, statusCode >= 200 && statusCode <= 299 else {
-                    self.methods.alert(title: "Sorry! We couldn't access your account.", message: "Check your information again.", buttonMessage: "Try again.", viewController: self)
+                    UserAlertManager.showAlert(title: "Sorry! We couldn't access your account.", message: "Check your information again.", buttonMessage: "Try again.", viewController: self)
                     sendError("Your request returned a status code other than 2xx!")
                     return
                 }
@@ -119,74 +118,39 @@ class LoginVC: UIViewController, LoginButtonDelegate{
     
     @IBAction func loginButton(_ sender: Any) {
         
-        usernameTextField.text = "cotchninha@yahoo.com.br"
+        usernameTextField.text = "cotchoninha@yahoo.com.br"
         passwordTextField.text = "lulu1234"
         
-        var request = URLRequest(url: URL(string: "https://www.udacity.com/api/session")!)
-        
-        request.httpMethod = "POST"
-        request.addValue("application/json", forHTTPHeaderField: "Accept")
-        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-        request.httpBody = "{\"udacity\": {\"username\": \"\(usernameTextField.text!)\", \"password\": \"\(passwordTextField.text!)\"}}".data(using: .utf8)
-       
-        let task = URLSession.shared.dataTask(with: request) { data, response, error in
-            
-            func sendError(_ error: String) {
-                print(error)
-            }
-            
-            /* GUARD: Was there an error? */
-            guard (error == nil) else {
-                sendError("There was an error with your request: \(error!)")
-                self.methods.alert(title: "No internet connection.", message: "Your connection seems to be out! Try again later.", buttonMessage: "Try again.", viewController: self)
-                return
-            }
-            
-            /* GUARD: Did we get a successful 2XX response? */
-            guard let statusCode = (response as? HTTPURLResponse)?.statusCode, statusCode >= 200 && statusCode <= 299 else {
-                self.methods.alert(title: "Sorry! We couldn't access your account.", message: "Check your information again.", buttonMessage: "Try again.", viewController: self)
-                sendError("Your request returned a status code other than 2xx!")
-                return
-            }
-            
-            /* GUARD: Was there any data returned? */
-            guard let data = data else {
-                sendError("No data was returned by the request!")
-                return
-            }
-            
-            let range = Range(5..<data.count)
-            let newData = data.subdata(in: range) /* subset response data! */
-            print("AQUI COMECA A IMPRIMIR O DATA!!!!")
-            print(String(data: newData, encoding: .utf8)!)
-
-            /* 5. Parse the data */
-            let parsedResult: [String:AnyObject]!
-            do{
-                parsedResult = try JSONSerialization.jsonObject(with: newData, options: .allowFragments) as? [String:AnyObject]
-            } catch{
-                sendError("Could not parse the data as JSON: '\(newData)'")
-                return
-            }
-            
-            guard let dictionarySession = parsedResult["session"], let dictionaryAccount = parsedResult["account"] else{
-                sendError("Cannot find keys 'session' in \(parsedResult)")
-                return
-            }
-            if let sessionID = dictionarySession["id"] as? String, let keyAccount = dictionaryAccount["key"] as? String{
-                self.completeLogin()
-                print("MARCELA - sessionID: \(sessionID) and accountKey: \(keyAccount)")
-                (UIApplication.shared.delegate as! AppDelegate).sessionID = sessionID
-                (UIApplication.shared.delegate as! AppDelegate).keyAccount = keyAccount
-            }else{
-                print("could not find a SessionID.")
-            }
-            
-            
+        //check if username and password are not empty
+        if  usernameTextField.text == "" || usernameTextField.text == nil{
+            UserAlertManager.showAlert(title: "Invalid username", message: "Please, type a valid username.", buttonMessage: "Try again.", viewController: self)
+            return
+        }
+        if passwordTextField.text == "" || passwordTextField.text == nil{
+            UserAlertManager.showAlert(title: "Invalid password", message: "Please, type a valid password.", buttonMessage: "Try again.", viewController: self)
+            return
         }
         
-        task.resume()
-        
+        //call a function that will make the login request passing a completion handler for the response
+        udacityClient.userLoginRequest(username: usernameTextField.text!, password: passwordTextField.text!) { (success, sessionID, keyAccount, error) in
+            if success{
+                //caso login tenha dado certo
+                performUIUpdatesOnMain {
+                    print("MARCELA - sessionID: \(sessionID) and accountKey: \(keyAccount)")
+                    (UIApplication.shared.delegate as! AppDelegate).sessionID = sessionID
+                    (UIApplication.shared.delegate as! AppDelegate).keyAccount = keyAccount
+                    self.completeLogin()
+                }
+            }else{
+                //caso login nao tenha dado certo
+                UserAlertManager.showAlert(title: "Login failed.", message: "We couldn't access your account. Try again.", buttonMessage: "Try again.", viewController: self)
+                
+                //TODO: Handle different type of errors later
+//                UserAlertManager.showAlert(title: "No internet connection.", message: "Your connection seems to be out! Try again later.", buttonMessage: "Try again.", viewController: self)
+//                UserAlertManager.showAlert(title: "Sorry! We couldn't access your account.", message: "Check your information again.", buttonMessage: "Try again.", viewController: self)
+            }
+            
+        }
     }
     
     @IBAction func SignInButton(_ sender: Any) {
@@ -194,17 +158,6 @@ class LoginVC: UIViewController, LoginButtonDelegate{
         let udacityWebSite = URL(string: "https://www.udacity.com/account/auth#!/signup")!
         UIApplication.shared.open(udacityWebSite, options: [:], completionHandler: nil)
     }
-    
-//    func alert(title: String, message: String, buttonMessage: String){
-//        // create the alert
-//        let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.alert)
-//        
-//        // add an action (button)
-//        alert.addAction(UIAlertAction(title: buttonMessage, style: UIAlertActionStyle.default, handler: nil))
-//        
-//        // show the alert
-//        self.present(alert, animated: true, completion: nil)
-//    }
     
 }
 
