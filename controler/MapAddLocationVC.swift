@@ -61,107 +61,17 @@ class AddMapViewController: UIViewController, MKMapViewDelegate{
     }
     
     
-    
-    //TODO adaptar checkForErrors em todas as viewControllers
-    func checkForErrors(data: Data?, response: URLResponse?, error: Error?) -> Bool{
-        //retornar true ou false pra tratar o data se for nil
-        func sendError(_ error: String) {
-            print(error)
-        }
-        /* GUARD: Was there an error? */
-        guard (error == nil) else {
-            sendError("There was an error with your request: \(error!)")
-            return false
-        }
-        
-        /* GUARD: Did we get a successful 2XX response? */
-        guard let statusCode = (response as? HTTPURLResponse)?.statusCode, statusCode >= 200 && statusCode <= 299 else {
-            sendError("Your request returned a status code other than 2xx!")
-            return false
-        }
-        
-        /* GUARD: Was there any data returned? */
-        guard let data = data else {
-            sendError("No data was returned by the request!")
-            return false
-        }
-        
-        return true
-    }
-    
-    func parseDataWithCodable<T: Decodable>(_ type: T.Type, data: Data) -> T? {
-        
-        let jsonDecoder = JSONDecoder()
-        do{
-            return try jsonDecoder.decode(type, from: data)
-        } catch{
-            print("Could not parse the data as JSON: '\(data)'")
-            return nil
-        }
-    }
-    
-//    func getUserInfo(){
-//        guard let accountKey = appDelegate.keyAccount else{
-//            print("MARCELA - there was no accountKey")
-//            return
-//        }
-//        let request = URLRequest(url: URL(string: "https://www.udacity.com/api/users/\(accountKey)")!)
-//        let session = URLSession.shared
-//        let task = session.dataTask(with: request) { data, response, error in
-//            let checkErrorResult = self.checkForErrors(data: data, response: response, error: error)
-//            if checkErrorResult{
-//                let range = Range(5..<data!.count)
-//                let newData = data?.subdata(in: range)
-//                print("MARCELA - IMPRIMINDO O DATA DE GETUSERINFO")/* subset response data! */
-//                print(String(data: newData!, encoding: .utf8)!)
-//                if let userInfo = self.parseDataWithCodable(UserKey.self, data: newData!){
-//                    self.user = userInfo.user
-//                    print("MARCELA - this is my userInfo: \(userInfo)")
-//                }
-//            }else{
-//                //TODO: como tratar esse problema
-//            }
-//        }
-//        task.resume()
-//    }
-    
     @IBAction func submitLocationButton(_ sender: Any) {
         
-        //unwrap of user values
-        guard let uniqueKey = user?.key, let firstName = user?.first_name, let lastName = user?.last_name, let mapString = locationString, let mediaURL = userLink, let latitude = locationAnnotation?.coordinate.latitude, let longitude = locationAnnotation?.coordinate.longitude else{
-            print("couldn't find data in user")
-            return
-        }
-        var request = URLRequest(url: URL(string: "https://parse.udacity.com/parse/classes/StudentLocation")!)
-        request.httpMethod = "POST"
-        request.addValue("QrX47CA9cyuGewLdsL7o5Eb8iug6Em8ye0dnAbIr", forHTTPHeaderField: "X-Parse-Application-Id")
-        request.addValue("QuWThTdiRmTux3YaDseUSEpUKo7aBYM737yKd4gY", forHTTPHeaderField: "X-Parse-REST-API-Key")
-        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-        //TODO FAZER ENCODE
-        let encoder = JSONEncoder()
-        let dataEncoded: Data
-        do{
-            dataEncoded = try encoder.encode(PostLocationDataHTTPBody(uniqueKey: uniqueKey, firstName: firstName, lastName: lastName, mapString: mapString, mediaURL: mediaURL, latitude: latitude, longitude: longitude))
-            request.httpBody = dataEncoded
-            let session = URLSession.shared
-            let task = session.dataTask(with: request) { data, response, error in
-                let checkErrorResult = self.checkForErrors(data: data, response: response, error: error)
-                if checkErrorResult{
-                    self.parseDataWithCodable(PostNewLocation.self, data: data!)                        //TODO: decidir se devo verificar se o usuario já tem ou nao uma location postada
-                    
-                    performUIUpdatesOnMain {
-                        let controller = self.storyboard!.instantiateViewController(withIdentifier: "MapVC") as! MapVC
-                        self.present(controller, animated: true, completion: nil)
-                    }
-                }else{
-                    //TODO: tratar esse problema
+        parseAPIClient.submitLocation(uniqueKey: user?.key, firstName: user?.first_name, lastName: user?.last_name, mapString: locationString, mediaURL: userLink, latitude: locationAnnotation?.coordinate.latitude, longitude: locationAnnotation?.coordinate.longitude) { (success, postNewLocation, error) in
+            if success{
+                performUIUpdatesOnMain {
+                    let controller = self.storyboard!.instantiateViewController(withIdentifier: "UsersTabBarController")
+                    self.present(controller, animated: true, completion: nil)
                 }
+            }else{
+                //TODO: tratar problema
             }
-             task.resume()
-        }catch{
-            print("nao deu")
-            dataEncoded = Data()
-            //TODO: apresentar um alerta pro usuario
         }
     }
     

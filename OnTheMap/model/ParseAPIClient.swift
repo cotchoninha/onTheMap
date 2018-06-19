@@ -10,6 +10,7 @@ import Foundation
 
 class ParseAPIClient: NSObject {
     
+    //parse for student
     func parseDataWithCodable(data: Data) -> [Student]? {
         
         let jsonDecoder = JSONDecoder()
@@ -21,7 +22,7 @@ class ParseAPIClient: NSObject {
             return nil
         }
     }
-    
+    //parse generic type for userInfo
     func parseDataWithCodableGenericType<T: Decodable>(_ type: T.Type, data: Data) -> T? {
         
         let jsonDecoder = JSONDecoder()
@@ -115,4 +116,64 @@ class ParseAPIClient: NSObject {
         }
         task.resume()
     }
+    
+    //post new User Location
+    func submitLocation(uniqueKey: String?, firstName: String?, lastName: String?, mapString: String?, mediaURL: String?, latitude: Double?, longitude: Double?, _ completionHandlerForPOSTLOCATION: @escaping (_ success: Bool, _ PostNewLocation: PostNewLocation?, _ error: Error?) -> Void) {
+        
+        //unwrap of user values
+        guard let uniqueKey = uniqueKey, let firstName = firstName, let lastName = lastName, let mapString = mapString, let mediaURL = mediaURL, let latitude = latitude, let longitude = longitude else{
+            print("couldn't find data in user")
+            return
+        }
+        var request = URLRequest(url: URL(string: "https://parse.udacity.com/parse/classes/StudentLocation")!)
+        request.httpMethod = "POST"
+        request.addValue("QrX47CA9cyuGewLdsL7o5Eb8iug6Em8ye0dnAbIr", forHTTPHeaderField: "X-Parse-Application-Id")
+        request.addValue("QuWThTdiRmTux3YaDseUSEpUKo7aBYM737yKd4gY", forHTTPHeaderField: "X-Parse-REST-API-Key")
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        //TODO FAZER ENCODE
+        let encoder = JSONEncoder()
+        let dataEncoded: Data
+        do{
+            dataEncoded = try encoder.encode(PostLocationDataHTTPBody(uniqueKey: uniqueKey, firstName: firstName, lastName: lastName, mapString: mapString, mediaURL: mediaURL, latitude: latitude, longitude: longitude))
+            request.httpBody = dataEncoded
+            let session = URLSession.shared
+            let task = session.dataTask(with: request) { data, response, error in
+                func sendError(_ error: String) {
+                    print(error)
+                    let userInfo = [NSLocalizedDescriptionKey : error]
+                    completionHandlerForPOSTLOCATION(false, nil, NSError(domain: "submitLocation", code: 1, userInfo: userInfo))
+                }
+                
+                /* GUARD: Was there an error? */
+                guard (error == nil) else {
+                    sendError("There was an error with your request: \(error!)")
+                    return
+                }
+                
+                /* GUARD: Did we get a successful 2XX response? */
+                guard let statusCode = (response as? HTTPURLResponse)?.statusCode, statusCode >= 200 && statusCode <= 299 else {
+                    sendError("Your request returned a status code other than 2xx!")
+                    return
+                }
+                
+                /* GUARD: Was there any data returned? */
+                guard let data = data else {
+                    sendError("No data was returned by the request!")
+                    return
+                }
+                
+                if let userNewLocation = self.parseDataWithCodableGenericType(PostNewLocation.self, data: data){
+                //TODO: decidir se devo verificar se o usuario já tem ou nao uma location postada
+                    completionHandlerForPOSTLOCATION(true, userNewLocation, nil)
+                }
+                
+            }
+            task.resume()
+        }catch{
+            print("nao deu")
+            dataEncoded = Data()
+            //TODO: apresentar um alerta pro usuario
+        }
+    }
+
 }

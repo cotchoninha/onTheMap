@@ -52,7 +52,7 @@ struct PostLocationDataHTTPBody: Encodable{
     var lastName: String
     var mapString: String
     var mediaURL: String
-    var latitude: CLLocationDegrees
-    var longitude: CLLocationDegrees
+    var latitude: Double
+    var longitude: Double
 }
 
