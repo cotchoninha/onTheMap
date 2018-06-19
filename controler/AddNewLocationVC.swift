@@ -14,13 +14,16 @@ import MapKit
 
 class AddNewLocationVC: UIViewController {
     
+    //MARK: Properties
+    @IBOutlet weak var locationTextField: UITextField!
+    @IBOutlet weak var linkTextField: UITextField!
+
+    //MARK: Methods
     func alert(title: String, message: String, buttonMessage: String){
         // create the alert
         let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.alert)
-        
         // add an action (button)
         alert.addAction(UIAlertAction(title: buttonMessage, style: UIAlertActionStyle.default, handler: nil))
-        
         // show the alert
         self.present(alert, animated: true, completion: nil)
     }
@@ -29,9 +32,6 @@ class AddNewLocationVC: UIViewController {
         self.dismiss(animated: true, completion: nil)
     }
     
-    @IBOutlet weak var locationTextField: UITextField!
-    
-    @IBOutlet weak var linkTextField: UITextField!
     
     @IBAction func findLocationButton(_ sender: Any) {
         locationTextField.text = "London"

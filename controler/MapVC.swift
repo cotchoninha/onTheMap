@@ -20,7 +20,7 @@ class MapVC: UIViewController, MKMapViewDelegate{
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        parseAPIClient.getStudendLocation {(success, studentsArray, error) in
+        parseAPIClient.getStudentsLocations {(success, studentsArray, error) in
             if success{
                 performUIUpdatesOnMain {
                     self.allStudents = studentsArray!

@@ -11,16 +11,31 @@ import MapKit
 
 class AddMapViewController: UIViewController, MKMapViewDelegate{
     
+    //MARK: Properties
+    @IBOutlet weak var mapView: MKMapView!
     var locationAnnotation: MKPointAnnotation?
     var locationString: String?
     var userLink: String?
     var user: User?
     var appDelegate: AppDelegate!
+    var parseAPIClient = ParseAPIClient()
+    
+    
+    //MARK: Methods
+    @IBAction func backButton(_ sender: Any) {
+        self.dismiss(animated: true, completion: nil)
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         appDelegate = UIApplication.shared.delegate as! AppDelegate
-        getUserInfo()
+        parseAPIClient.getUserInfo(accountKey: appDelegate.keyAccount!) { (success, user, error) in
+            if success{
+                self.user = user
+            }else{
+                //TODO: tratar erro
+            }
+        }
         self.mapView.delegate = self
         if let annotationLocation = self.locationAnnotation{
             self.mapView.addAnnotation(annotationLocation)
@@ -45,11 +60,7 @@ class AddMapViewController: UIViewController, MKMapViewDelegate{
         return pinView
     }
     
-    @IBAction func backButton(_ sender: Any) {
-        self.dismiss(animated: true, completion: nil)
-    }
     
-    @IBOutlet weak var mapView: MKMapView!
     
     //TODO adaptar checkForErrors em todas as viewControllers
     func checkForErrors(data: Data?, response: URLResponse?, error: Error?) -> Bool{
@@ -89,30 +100,30 @@ class AddMapViewController: UIViewController, MKMapViewDelegate{
         }
     }
     
-    func getUserInfo(){
-        guard let accountKey = appDelegate.keyAccount else{
-            print("MARCELA - there was no accountKey")
-            return
-        }
-        let request = URLRequest(url: URL(string: "https://www.udacity.com/api/users/\(accountKey)")!)
-        let session = URLSession.shared
-        let task = session.dataTask(with: request) { data, response, error in
-            let checkErrorResult = self.checkForErrors(data: data, response: response, error: error)
-            if checkErrorResult{
-                let range = Range(5..<data!.count)
-                let newData = data?.subdata(in: range)
-                print("MARCELA - IMPRIMINDO O DATA DE GETUSERINFO")/* subset response data! */
-                print(String(data: newData!, encoding: .utf8)!)
-                if let userInfo = self.parseDataWithCodable(UserKey.self, data: newData!){
-                    self.user = userInfo.user
-                    print("MARCELA - this is my userInfo: \(userInfo)")
-                }
-            }else{
-                //TODO: como tratar esse problema
-            }
-        }
-        task.resume()
-    }
+//    func getUserInfo(){
+//        guard let accountKey = appDelegate.keyAccount else{
+//            print("MARCELA - there was no accountKey")
+//            return
+//        }
+//        let request = URLRequest(url: URL(string: "https://www.udacity.com/api/users/\(accountKey)")!)
+//        let session = URLSession.shared
+//        let task = session.dataTask(with: request) { data, response, error in
+//            let checkErrorResult = self.checkForErrors(data: data, response: response, error: error)
+//            if checkErrorResult{
+//                let range = Range(5..<data!.count)
+//                let newData = data?.subdata(in: range)
+//                print("MARCELA - IMPRIMINDO O DATA DE GETUSERINFO")/* subset response data! */
+//                print(String(data: newData!, encoding: .utf8)!)
+//                if let userInfo = self.parseDataWithCodable(UserKey.self, data: newData!){
+//                    self.user = userInfo.user
+//                    print("MARCELA - this is my userInfo: \(userInfo)")
+//                }
+//            }else{
+//                //TODO: como tratar esse problema
+//            }
+//        }
+//        task.resume()
+//    }
     
     @IBAction func submitLocationButton(_ sender: Any) {
         

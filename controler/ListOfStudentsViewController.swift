@@ -17,7 +17,7 @@ class ListOfStudentsViewController: UITableViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        parseAPIClient.getStudendLocation {(success, studentsArray, error) in
+        parseAPIClient.getStudentsLocations {(success, studentsArray, error) in
             if success{
                 performUIUpdatesOnMain {
                     self.allStudents = studentsArray!
@@ -69,7 +69,7 @@ class ListOfStudentsViewController: UITableViewController {
     }
 //falta testar se funciona....
     @IBAction func refreshButton(_ sender: Any) {
-        parseAPIClient.getStudendLocation {(success, studentsArray, error) in
+        parseAPIClient.getStudentsLocations {(success, studentsArray, error) in
             if success{
                 performUIUpdatesOnMain {
                     self.allStudents = studentsArray!
