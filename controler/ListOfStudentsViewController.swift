@@ -30,10 +30,6 @@ class ListOfStudentsViewController: UITableViewController {
         }
     }
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-    }
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return allStudents.count
     }
@@ -73,7 +69,7 @@ class ListOfStudentsViewController: UITableViewController {
             }
         }
     }
-//falta testar se funciona....
+
     @IBAction func refreshButton(_ sender: Any) {
         parseAPIClient.getStudentsLocations {(success, studentsArray, error) in
             if success{

@@ -65,6 +65,7 @@
 		0C015ABA20D2ED510028CA68 /* model */ = {
 			isa = PBXGroup;
 			children = (
+				0C3F7E1920C9678C00A0E39C /* UserAlertManager.swift */,
 				0C3F7E1B20C97CA800A0E39C /* Structs.swift */,
 				0C07552320D684AC00B2652E /* UdacityAPIClient.swift */,
 				0C07552520D83BA000B2652E /* ParseAPIClient.swift */,
@@ -111,7 +112,6 @@
 				0C9BFACA20C2A31300F5A25D /* AppDelegate.swift */,
 				0C9BFADE20C5684900F5A25D /* Constants.swift */,
 				0C9EBA5320CE6CD300869032 /* GCDBlackBox.swift */,
-				0C3F7E1920C9678C00A0E39C /* UserAlertManager.swift */,
 				0C015ABA20D2ED510028CA68 /* model */,
 				0C9BFAD120C2A31600F5A25D /* Assets.xcassets */,
 				0C9BFAD320C2A31600F5A25D /* LaunchScreen.storyboard */,

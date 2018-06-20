@@ -26,8 +26,7 @@ class AddNewLocationVC: UIViewController {
     
     
     @IBAction func findLocationButton(_ sender: Any) {
-        locationTextField.text = "Campinas, Brazil"
-        linkTextField.text = "www.udacity.com"
+   
         if locationTextField.text == "" || locationTextField.text == nil{
             UserAlertManager.showAlert(title: "INVALID LOCATION", message: "Please, enter a valid location", buttonMessage: "Ok!", viewController: self)
         }else if linkTextField.text == ""{

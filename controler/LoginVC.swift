@@ -76,9 +76,6 @@ class LoginVC: UIViewController, LoginButtonDelegate{
     //MARK: LOGIN WITH UDACITY USER
     @IBAction func loginButton(_ sender: Any) {
         
-        usernameTextField.text = "cotchoninha@yahoo.com.br"
-        passwordTextField.text = "lulu1234"
-        
         //check if username and password are not empty
         if  usernameTextField.text == "" || usernameTextField.text == nil{
             UserAlertManager.showAlert(title: "Invalid username", message: "Please, type a valid username.", buttonMessage: "Try again.", viewController: self)
@@ -91,23 +88,19 @@ class LoginVC: UIViewController, LoginButtonDelegate{
         
         //call a function that will make the login request passing a completion handler for the response
         udacityClient.userLoginRequest(username: usernameTextField.text!, password: passwordTextField.text!) { (success, sessionID, keyAccount, error) in
-            if success{
-                //caso login tenha dado certo
-                performUIUpdatesOnMain {
+            performUIUpdatesOnMain {
+                if success{
+                    //caso login tenha dado certo
                     print("MARCELA - sessionID: \(sessionID) and accountKey: \(keyAccount)")
                     (UIApplication.shared.delegate as! AppDelegate).sessionID = sessionID
                     (UIApplication.shared.delegate as! AppDelegate).keyAccount = keyAccount
                     self.completeLogin()
+                    
+                }else{
+                    //caso login nao tenha dado certo
+                    UserAlertManager.showAlert(title: "Login failed.", message: "We couldn't access your account. Try again.", buttonMessage: "Try again.", viewController: self)
                 }
-            }else{
-                //caso login nao tenha dado certo
-                UserAlertManager.showAlert(title: "Login failed.", message: "We couldn't access your account. Try again.", buttonMessage: "Try again.", viewController: self)
-                
-                //TODO: Handle different type of errors later
-//                UserAlertManager.showAlert(title: "No internet connection.", message: "Your connection seems to be out! Try again later.", buttonMessage: "Try again.", viewController: self)
-//                UserAlertManager.showAlert(title: "Sorry! We couldn't access your account.", message: "Check your information again.", buttonMessage: "Try again.", viewController: self)
             }
-            
         }
     }
     
