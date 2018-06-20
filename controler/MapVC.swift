@@ -9,12 +9,14 @@
 import MapKit
 import UIKit
 import CoreLocation
+import FBSDKLoginKit
 
 class MapVC: UIViewController, MKMapViewDelegate{
     
     //MARK: Properties
     @IBOutlet weak var mapView: MKMapView!
     var parseAPIClient = ParseAPIClient()
+    var udacityAPIClient = UdacityAPIClient()
     var allStudents = [Student]()
     var annotations = [MKPointAnnotation]()
     
@@ -101,5 +103,20 @@ class MapVC: UIViewController, MKMapViewDelegate{
             }
         }
     }
+    
+    @IBAction func logoutButton(_ sender: Any) {
+        udacityAPIClient.logoutUser { (success, error) in
+            if success{
+                FBSDKLoginManager().logOut()
+                performUIUpdatesOnMain {
+                    let controller = self.storyboard!.instantiateViewController(withIdentifier: "LoginViewController") as UIViewController
+                    self.present(controller, animated: true, completion: nil)
+                }
+            }else{
+                UserAlertManager.showAlert(title: "Logout failed.", message: "Sorry, we couldn't logout you properly.", buttonMessage: "Try again.", viewController: self)
+            }
+        }
+    }
+    
     
 }

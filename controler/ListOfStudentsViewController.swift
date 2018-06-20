@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import FBSDKLoginKit
 
 class ListOfStudentsViewController: UITableViewController {
     
@@ -62,6 +63,7 @@ class ListOfStudentsViewController: UITableViewController {
         //checar se está logado com a udacity ou facebook e fazer logoff por um destes
         udacityAPIClient.logoutUser { (success, error) in
             if success{
+                FBSDKLoginManager().logOut()
                 performUIUpdatesOnMain {
                     let controller = self.storyboard!.instantiateViewController(withIdentifier: "LoginViewController") as UIViewController
                     self.present(controller, animated: true, completion: nil)

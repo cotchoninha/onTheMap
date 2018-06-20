@@ -28,8 +28,13 @@ class LoginVC: UIViewController, LoginButtonDelegate{
         super.viewDidLoad()
         let loginButton = LoginButton(readPermissions: [ .publicProfile ])
         loginButton.delegate = self
-        loginButton.center = view.center
         view.addSubview(loginButton)
+        loginButton.translatesAutoresizingMaskIntoConstraints = false
+        loginButton.heightAnchor.constraint(equalToConstant: 30).isActive = true
+        loginButton.widthAnchor.constraint(equalToConstant: 200).isActive = true
+        loginButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        loginButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -50).isActive = true
+        
     }
     
     //MARK: LOGIN WITH FACEBOOK
