@@ -33,7 +33,7 @@ class AddMapViewController: UIViewController, MKMapViewDelegate{
             if success{
                 self.user = user
             }else{
-                //TODO: tratar erro
+                UserAlertManager.showAlert(title: "Invalid User", message: "Sorry, we couldn't obtain the user's information.", buttonMessage: "Try logging in again.", viewController: self)
             }
         }
         self.mapView.delegate = self
@@ -70,7 +70,7 @@ class AddMapViewController: UIViewController, MKMapViewDelegate{
                     self.present(controller, animated: true, completion: nil)
                 }
             }else{
-                //TODO: tratar problema
+                UserAlertManager.showAlert(title: "Submission failed.", message: "Sorry, we couldn't post your location.", buttonMessage: "Try again.", viewController: self)
             }
         }
     }

@@ -54,10 +54,6 @@ class LoginVC: UIViewController, LoginButtonDelegate{
                 }else{
                     //caso login nao tenha dado certo
                     UserAlertManager.showAlert(title: "Login failed.", message: "We couldn't access your account. Try again.", buttonMessage: "Try again.", viewController: self)
-                    
-                    //TODO: Handle different type of errors later
-                    //                UserAlertManager.showAlert(title: "No internet connection.", message: "Your connection seems to be out! Try again later.", buttonMessage: "Try again.", viewController: self)
-                    //                UserAlertManager.showAlert(title: "Sorry! We couldn't access your account.", message: "Check your information again.", buttonMessage: "Try again.", viewController: self)
                 }
                 
             }

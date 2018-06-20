@@ -72,8 +72,8 @@
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </tabBar>
                     <connections>
-                        <segue destination="vjg-qG-7Js" kind="relationship" relationship="viewControllers" id="SVq-hG-por"/>
-                        <segue destination="dxx-aD-KPh" kind="relationship" relationship="viewControllers" id="pbm-zX-NEe"/>
+                        <segue destination="dxx-aD-KPh" kind="relationship" relationship="viewControllers" id="rBx-jQ-xe1"/>
+                        <segue destination="vjg-qG-7Js" kind="relationship" relationship="viewControllers" id="mRV-rN-NMb"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="oQR-W2-bPL" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -186,7 +186,7 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6ah-Tj-hHb">
+                            <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6ah-Tj-hHb">
                                 <rect key="frame" x="132" y="319" width="111" height="30"/>
                                 <color key="tintColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <state key="normal" title="FIND LOCATION"/>
@@ -194,8 +194,8 @@
                                     <action selector="findLocationButton:" destination="FO1-Dj-F1n" eventType="touchUpInside" id="uYS-ip-OYM"/>
                                 </connections>
                             </button>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="uGu-nk-BFu">
-                                <rect key="frame" x="146" y="151" width="83" height="83.5"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_world" translatesAutoresizingMaskIntoConstraints="NO" id="uGu-nk-BFu">
+                                <rect key="frame" x="146" y="168" width="83" height="67"/>
                             </imageView>
                             <navigationBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vQq-j3-mO1">
                                 <rect key="frame" x="0.0" y="20" width="375" height="44"/>
@@ -219,10 +219,9 @@
                             <constraint firstItem="sVI-78-7T4" firstAttribute="trailing" secondItem="Axc-hO-rib" secondAttribute="trailing" constant="72" id="Gfk-il-agX"/>
                             <constraint firstItem="Axc-hO-rib" firstAttribute="leading" secondItem="sVI-78-7T4" secondAttribute="leading" constant="71" id="GgJ-0q-gq1"/>
                             <constraint firstItem="6ah-Tj-hHb" firstAttribute="leading" secondItem="sVI-78-7T4" secondAttribute="leading" constant="132" id="Gsi-kh-7dT"/>
-                            <constraint firstItem="uGu-nk-BFu" firstAttribute="leading" secondItem="sVI-78-7T4" secondAttribute="leading" constant="146" id="H34-6f-zG1"/>
-                            <constraint firstItem="sVI-78-7T4" firstAttribute="trailing" secondItem="uGu-nk-BFu" secondAttribute="trailing" constant="146" id="Ie5-Yg-nL6"/>
+                            <constraint firstItem="uGu-nk-BFu" firstAttribute="leading" secondItem="sVI-78-7T4" secondAttribute="leading" constant="146" id="H5b-Yg-pI3"/>
                             <constraint firstItem="sVI-78-7T4" firstAttribute="trailing" secondItem="6ah-Tj-hHb" secondAttribute="trailing" constant="132" id="Mi6-QS-TbX"/>
-                            <constraint firstItem="uGu-nk-BFu" firstAttribute="top" secondItem="sVI-78-7T4" secondAttribute="top" constant="131" id="Ng9-oW-Ajh"/>
+                            <constraint firstItem="sVI-78-7T4" firstAttribute="trailing" secondItem="uGu-nk-BFu" secondAttribute="trailing" constant="146" id="UvL-W2-1ff"/>
                             <constraint firstItem="bNw-Ng-Zys" firstAttribute="top" secondItem="Axc-hO-rib" secondAttribute="bottom" constant="8" id="aST-Ap-MOZ"/>
                             <constraint firstItem="6ah-Tj-hHb" firstAttribute="top" secondItem="bNw-Ng-Zys" secondAttribute="bottom" constant="8" id="agF-A1-HO6"/>
                             <constraint firstItem="6ah-Tj-hHb" firstAttribute="top" secondItem="bNw-Ng-Zys" secondAttribute="bottom" constant="8" id="n65-Vq-vjL"/>
@@ -252,7 +251,10 @@
                             </mapView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VSa-n7-Mij">
                                 <rect key="frame" x="20" y="586" width="335" height="30"/>
-                                <state key="normal" title="Button"/>
+                                <color key="backgroundColor" red="0.16470588235294117" green="0.5490196078431373" blue="0.98431372549019602" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <state key="normal" title="FINISH">
+                                    <color key="titleColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
                                 <connections>
                                     <action selector="submitLocationButton:" destination="KK3-Xb-sVQ" eventType="touchUpInside" id="9Sg-4E-NkU"/>
                                 </connections>
@@ -261,7 +263,7 @@
                                 <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                                 <items>
                                     <navigationItem title="Title" id="ca2-89-bM7">
-                                        <barButtonItem key="leftBarButtonItem" title="Add Location" id="H45-XZ-TEn">
+                                        <barButtonItem key="leftBarButtonItem" title="Add Location" image="icon_back-arrow" id="H45-XZ-TEn">
                                             <connections>
                                                 <action selector="backButton:" destination="KK3-Xb-sVQ" id="DUF-ny-SbK"/>
                                             </connections>
@@ -293,7 +295,7 @@
             </objects>
             <point key="canvasLocation" x="5700" y="-181.25937031484258"/>
         </scene>
-        <!--Item-->
+        <!--Map-->
         <scene sceneID="Jkb-gf-cNb">
             <objects>
                 <viewController storyboardIdentifier="MapVC" id="dxx-aD-KPh" customClass="MapVC" customModule="OnTheMap" customModuleProvider="target" sceneMemberID="viewController">
@@ -316,7 +318,11 @@
                                                     <segue destination="FO1-Dj-F1n" kind="presentation" id="SZP-WD-ZKe"/>
                                                 </connections>
                                             </barButtonItem>
-                                            <barButtonItem systemItem="refresh" id="d0Q-7P-NXK"/>
+                                            <barButtonItem systemItem="refresh" id="d0Q-7P-NXK">
+                                                <connections>
+                                                    <action selector="refreshButton:" destination="dxx-aD-KPh" id="q4T-rn-mPc"/>
+                                                </connections>
+                                            </barButtonItem>
                                         </rightBarButtonItems>
                                     </navigationItem>
                                 </items>
@@ -331,7 +337,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="pa3-dL-dQN"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Item" id="byG-uB-DpU"/>
+                    <tabBarItem key="tabBarItem" title="Map" image="icon_mapview-deselected" id="byG-uB-DpU"/>
                     <navigationItem key="navigationItem" id="iFx-ep-3Pb"/>
                     <connections>
                         <outlet property="mapView" destination="sha-HA-aLm" id="zEB-GT-Zdo"/>
@@ -341,11 +347,11 @@
             </objects>
             <point key="canvasLocation" x="2845.5999999999999" y="408.84557721139436"/>
         </scene>
-        <!--Item-->
+        <!--List-->
         <scene sceneID="fbi-SJ-23F">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="vjg-qG-7Js" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" id="FY6-lp-fu4"/>
+                    <tabBarItem key="tabBarItem" title="List" image="icon_listview-deselected" id="FY6-lp-fu4"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="Qwa-ky-UBu">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
@@ -362,9 +368,13 @@
         </scene>
     </scenes>
     <resources>
+        <image name="icon_back-arrow" width="24" height="24"/>
+        <image name="icon_listview-deselected" width="75" height="50"/>
+        <image name="icon_mapview-deselected" width="75" height="50"/>
         <image name="icon_pin" width="24" height="24"/>
+        <image name="icon_world" width="52" height="67"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="SZP-WD-ZKe"/>
+        <segue reference="u4y-sB-xfX"/>
     </inferredMetricsTieBreakers>
 </document>

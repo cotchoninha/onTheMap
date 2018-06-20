@@ -24,7 +24,7 @@ class ListOfStudentsViewController: UITableViewController {
                     self.tableView.reloadData()
                 }
             }else{
-                //tratar o erro
+                UserAlertManager.showAlert(title: "Empty list.", message: "Sorry, we couldn't obtain the other students locations.", buttonMessage: "Try logging in again.", viewController: self)
             }
         }
     }
@@ -67,7 +67,7 @@ class ListOfStudentsViewController: UITableViewController {
                     self.present(controller, animated: true, completion: nil)
                 }
             }else{
-                //tratar o erro
+                UserAlertManager.showAlert(title: "Logout failed.", message: "Sorry, we couldn't logout you properly.", buttonMessage: "Try again.", viewController: self)
             }
         }
     }
@@ -80,7 +80,7 @@ class ListOfStudentsViewController: UITableViewController {
                     self.tableView.reloadData()
                 }
             }else{
-                //tratar o erro
+                UserAlertManager.showAlert(title: "Empty list.", message: "Sorry, we couldn't obtain the other students locations.", buttonMessage: "Try logging in again.", viewController: self)
             }
         }
     }

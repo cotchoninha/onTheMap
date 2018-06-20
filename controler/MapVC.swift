@@ -27,7 +27,7 @@ class MapVC: UIViewController, MKMapViewDelegate{
                     self.addStudentLocationToMap()
                 }
             }else{
-                //tratar o erro
+                UserAlertManager.showAlert(title: "Empty list.", message: "Sorry, we couldn't obtain the other students locations.", buttonMessage: "Try logging in again.", viewController: self)
             }
         }
     }
@@ -88,4 +88,18 @@ class MapVC: UIViewController, MKMapViewDelegate{
             }
         }
     }
+    
+    @IBAction func refreshButton(_ sender: Any) {
+        parseAPIClient.getStudentsLocations {(success, studentsArray, error) in
+            if success{
+                performUIUpdatesOnMain {
+                    self.allStudents = studentsArray!
+                    self.addStudentLocationToMap()
+                }
+            }else{
+                UserAlertManager.showAlert(title: "Empty list.", message: "Sorry, we couldn't obtain the other students locations.", buttonMessage: "Try logging in again.", viewController: self)
+            }
+        }
+    }
+    
 }

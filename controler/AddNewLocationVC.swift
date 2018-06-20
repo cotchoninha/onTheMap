@@ -19,14 +19,6 @@ class AddNewLocationVC: UIViewController {
     @IBOutlet weak var linkTextField: UITextField!
 
     //MARK: Methods
-    func alert(title: String, message: String, buttonMessage: String){
-        // create the alert
-        let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.alert)
-        // add an action (button)
-        alert.addAction(UIAlertAction(title: buttonMessage, style: UIAlertActionStyle.default, handler: nil))
-        // show the alert
-        self.present(alert, animated: true, completion: nil)
-    }
     
     @IBAction func cancelButton(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
@@ -37,10 +29,10 @@ class AddNewLocationVC: UIViewController {
         locationTextField.text = "Campinas, Brazil"
         linkTextField.text = "www.udacity.com"
         if locationTextField.text == "" || locationTextField.text == nil{
-            alert(title: "INVALID LOCATION", message: "Please, enter a valid location", buttonMessage: "Ok!")
+            UserAlertManager.showAlert(title: "INVALID LOCATION", message: "Please, enter a valid location", buttonMessage: "Ok!", viewController: self)
         }else if linkTextField.text == ""{
             //checar se é o link URL
-            self.alert(title: "INVALID LINK", message: "Please, enter a valid link", buttonMessage: "Ok!")
+            UserAlertManager.showAlert(title: "INVALID LINK", message: "Please, enter a valid link", buttonMessage: "Ok!", viewController: self)
         }else{
             let locationString = locationTextField.text
             let geocoder = CLGeocoder()
