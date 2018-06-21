@@ -48,17 +48,27 @@ class LoginVC: UIViewController, LoginButtonDelegate{
         case .success(let grantedPermissions, let declinedPermissions, let accessToken):
             print("Logged In")
             udacityClient.userLoginRequestWithFacebook(authenticationToken: accessToken.authenticationToken) { (success, sessionID, keyAccount, error) in
-                if success{
-                    //caso login tenha dado certo
-                    performUIUpdatesOnMain {
+                performUIUpdatesOnMain {
+                    if success{
+                        //caso login tenha dado certo
                         print("MARCELA - sessionID: \(sessionID) and accountKey: \(keyAccount)")
                         (UIApplication.shared.delegate as! AppDelegate).sessionID = sessionID
                         (UIApplication.shared.delegate as! AppDelegate).keyAccount = keyAccount
                         self.completeLogin()
+                        
+                    }else{
+                        switch error{
+                        case LoginRequestERROR.connectionFailed?:
+                            UserAlertManager.showAlert(title: "No connection", message: "There's no network connection. Please, try again.", buttonMessage: "Try again.", viewController: self)
+                        case LoginRequestERROR.invalidUserImput?:
+                            UserAlertManager.showAlert(title: "Login failed.", message: "We couldn't access your account. Try again.", buttonMessage: "Try again.", viewController: self)
+                        case LoginRequestERROR.noDataReturned?:
+                            UserAlertManager.showAlert(title: "Login failed.", message: "We couldn't access your account. Try again.", buttonMessage: "Try again.", viewController: self)
+                        default:
+                            print("an error has occured")
+                            UserAlertManager.showAlert(title: "Login failed.", message: "We couldn't access your account. Try again.", buttonMessage: "Try again.", viewController: self)
+                        }
                     }
-                }else{
-                    //caso login nao tenha dado certo
-                    UserAlertManager.showAlert(title: "Login failed.", message: "We couldn't access your account. Try again.", buttonMessage: "Try again.", viewController: self)
                 }
                 
             }
@@ -95,10 +105,18 @@ class LoginVC: UIViewController, LoginButtonDelegate{
                     (UIApplication.shared.delegate as! AppDelegate).sessionID = sessionID
                     (UIApplication.shared.delegate as! AppDelegate).keyAccount = keyAccount
                     self.completeLogin()
-                    
-                }else{
-                    //caso login nao tenha dado certo
-                    UserAlertManager.showAlert(title: "Login failed.", message: "We couldn't access your account. Try again.", buttonMessage: "Try again.", viewController: self)
+                }else {
+                    switch error{
+                    case LoginRequestERROR.connectionFailed?:
+                        UserAlertManager.showAlert(title: "No connection", message: "There's no network connection. Please, try again.", buttonMessage: "Try again.", viewController: self)
+                    case LoginRequestERROR.invalidUserImput?:
+                        UserAlertManager.showAlert(title: "Login failed.", message: "We couldn't access your account. Try again.", buttonMessage: "Try again.", viewController: self)
+                    case LoginRequestERROR.noDataReturned?:
+                        UserAlertManager.showAlert(title: "Login failed.", message: "We couldn't access your account. Try again.", buttonMessage: "Try again.", viewController: self)
+                    default:
+                        print("an error has occured")
+                        UserAlertManager.showAlert(title: "Login failed.", message: "We couldn't access your account. Try again.", buttonMessage: "Try again.", viewController: self)
+                    }
                 }
             }
         }

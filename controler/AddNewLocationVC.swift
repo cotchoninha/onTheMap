@@ -24,12 +24,23 @@ class AddNewLocationVC: UIViewController {
         self.dismiss(animated: true, completion: nil)
     }
     
+    func verifyUrl (urlString: String?) -> Bool {
+        //Check for nil
+        if let urlString = urlString {
+            // create NSURL instance
+            if let url = URL(string: urlString) {
+                // check if your application can open the NSURL instance
+                return UIApplication.shared.canOpenURL(url)
+            }
+        }
+        return false
+    }
     
     @IBAction func findLocationButton(_ sender: Any) {
    
         if locationTextField.text == "" || locationTextField.text == nil{
             UserAlertManager.showAlert(title: "INVALID LOCATION", message: "Please, enter a valid location", buttonMessage: "Ok!", viewController: self)
-        }else if linkTextField.text == ""{
+        }else if linkTextField.text == "" || !verifyUrl(urlString: linkTextField.text){
             //checar se é o link URL
             UserAlertManager.showAlert(title: "INVALID LINK", message: "Please, enter a valid link", buttonMessage: "Ok!", viewController: self)
         }else{

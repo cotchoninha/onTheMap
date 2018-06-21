@@ -19,13 +19,14 @@ class ListOfStudentsViewController: UITableViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         parseAPIClient.getStudentsLocations {(success, studentsArray, error) in
-            if success{
-                performUIUpdatesOnMain {
+            performUIUpdatesOnMain {
+                if success{
                     self.allStudents = studentsArray!
                     self.tableView.reloadData()
+                    
+                }else{
+                    UserAlertManager.showAlert(title: "Empty list.", message: "Sorry, we couldn't obtain the other students locations.", buttonMessage: "Try logging in again.", viewController: self)
                 }
-            }else{
-                UserAlertManager.showAlert(title: "Empty list.", message: "Sorry, we couldn't obtain the other students locations.", buttonMessage: "Try logging in again.", viewController: self)
             }
         }
     }
@@ -56,34 +57,46 @@ class ListOfStudentsViewController: UITableViewController {
     }
     
     @IBAction func logoutButton(_ sender: Any) {
-        //checar se está logado com a udacity ou facebook e fazer logoff por um destes
+        
         udacityAPIClient.logoutUser { (success, error) in
-            if success{
-                FBSDKLoginManager().logOut()
-                performUIUpdatesOnMain {
+            performUIUpdatesOnMain {
+                if success{
+                    FBSDKLoginManager().logOut()
                     let controller = self.storyboard!.instantiateViewController(withIdentifier: "LoginViewController") as UIViewController
                     self.present(controller, animated: true, completion: nil)
+                    
+                }else{
+                    switch error{
+                    case LoginRequestERROR.connectionFailed?:
+                        UserAlertManager.showAlert(title: "No connection", message: "There's no network connection. Please, try again.", buttonMessage: "Try again.", viewController: self)
+                    case LoginRequestERROR.invalidUserImput?:
+                        UserAlertManager.showAlert(title: "Logout failed.", message: "We couldn't logout from your account. Try again.", buttonMessage: "Try again.", viewController: self)
+                    case LoginRequestERROR.noDataReturned?:
+                        UserAlertManager.showAlert(title: "Logout failed.", message: "We couldn't logout from your account. Try again.", buttonMessage: "Try again.", viewController: self)
+                    default:
+                        print("an error has occured")
+                        UserAlertManager.showAlert(title: "Logout failed.", message: "We couldn't logout from your account. Try again.", buttonMessage: "Try again.", viewController: self)
+                    }
                 }
-            }else{
-                UserAlertManager.showAlert(title: "Logout failed.", message: "Sorry, we couldn't logout you properly.", buttonMessage: "Try again.", viewController: self)
             }
         }
     }
-
+    
     @IBAction func refreshButton(_ sender: Any) {
         parseAPIClient.getStudentsLocations {(success, studentsArray, error) in
-            if success{
-                performUIUpdatesOnMain {
+            performUIUpdatesOnMain {
+                if success{
                     self.allStudents = studentsArray!
                     self.tableView.reloadData()
+                    
+                }else{
+                    UserAlertManager.showAlert(title: "Empty list.", message: "Sorry, we couldn't obtain the other students locations.", buttonMessage: "Try logging in again.", viewController: self)
                 }
-            }else{
-                UserAlertManager.showAlert(title: "Empty list.", message: "Sorry, we couldn't obtain the other students locations.", buttonMessage: "Try logging in again.", viewController: self)
             }
         }
     }
-
-
+    
+    
     @IBAction func addButton(_ sender: Any) {
         
     }
