@@ -10,6 +10,14 @@ import Foundation
 
 class ParseAPIClient: NSObject {
     
+    //singleton
+    class func sharedInstance() -> ParseAPIClient {
+        struct Singleton {
+            static var sharedInstance = ParseAPIClient()
+        }
+        return Singleton.sharedInstance
+    }
+    
     //parse for student
     func parseDataWithCodable(data: Data) -> [StudentInformation]? {
         

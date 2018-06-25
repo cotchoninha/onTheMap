@@ -16,7 +16,6 @@ class LoginVC: UIViewController, LoginButtonDelegate{
     
     
     //MARK: Properties
-    let udacityClient = UdacityAPIClient()
     @IBOutlet weak var usernameTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
@@ -45,34 +44,49 @@ class LoginVC: UIViewController, LoginButtonDelegate{
     
     //MARK: LOGIN WITH FACEBOOK
     func loginButtonDidCompleteLogin(_ loginButton:LoginButton,result:LoginResult){
+        activityIndicator.isHidden = false
+        activityIndicator.startAnimating()
         switch result {
         case .failed(let error):
             print(error)
             UserAlertManager.showAlert(title: "Sorry! We couldn't access your account.", message: "Check your information again.", buttonMessage: "Try again.", viewController: self)
+            activityIndicator.stopAnimating()
+            activityIndicator.isHidden = true
         case .cancelled:
             print("Cancelled")
+            activityIndicator.stopAnimating()
+            activityIndicator.isHidden = true
         case .success(let grantedPermissions, let declinedPermissions, let accessToken):
             print("Logged In")
-            udacityClient.userLoginRequestWithFacebook(authenticationToken: accessToken.authenticationToken) { (success, sessionID, keyAccount, error) in
+            UdacityAPIClient.sharedInstance().userLoginRequestWithFacebook(authenticationToken: accessToken.authenticationToken) { (success, sessionID, keyAccount, error) in
                 performUIUpdatesOnMain {
                     if success{
                         //caso login tenha dado certo
                         print("MARCELA - sessionID: \(sessionID) and accountKey: \(keyAccount)")
                         (UIApplication.shared.delegate as! AppDelegate).sessionID = sessionID
                         (UIApplication.shared.delegate as! AppDelegate).keyAccount = keyAccount
+                        self.activityIndicator.stopAnimating()
                         self.completeLogin()
                         
                     }else{
                         switch error{
                         case LoginRequestERROR.connectionFailed?:
                             UserAlertManager.showAlert(title: "No connection", message: "There's no network connection. Please, try again.", buttonMessage: "Try again.", viewController: self)
+                            self.activityIndicator.stopAnimating()
+                            self.activityIndicator.isHidden = true
                         case LoginRequestERROR.invalidUserImput?:
                             UserAlertManager.showAlert(title: "Login failed.", message: "We couldn't access your account. Try again.", buttonMessage: "Try again.", viewController: self)
+                            self.activityIndicator.stopAnimating()
+                            self.activityIndicator.isHidden = true
                         case LoginRequestERROR.noDataReturned?:
                             UserAlertManager.showAlert(title: "Login failed.", message: "We couldn't access your account. Try again.", buttonMessage: "Try again.", viewController: self)
+                            self.activityIndicator.stopAnimating()
+                            self.activityIndicator.isHidden = true
                         default:
                             print("an error has occured")
                             UserAlertManager.showAlert(title: "Login failed.", message: "We couldn't access your account. Try again.", buttonMessage: "Try again.", viewController: self)
+                            self.activityIndicator.stopAnimating()
+                            self.activityIndicator.isHidden = true
                         }
                     }
                 }
@@ -111,7 +125,7 @@ class LoginVC: UIViewController, LoginButtonDelegate{
         }
         
         //call a function that will make the login request passing a completion handler for the response
-        udacityClient.userLoginRequest(username: usernameTextField.text!, password: passwordTextField.text!) { (success, sessionID, keyAccount, error) in
+        UdacityAPIClient.sharedInstance().userLoginRequest(username: usernameTextField.text!, password: passwordTextField.text!) { (success, sessionID, keyAccount, error) in
             performUIUpdatesOnMain {
                 self.activityIndicator.stopAnimating()
                 if success{

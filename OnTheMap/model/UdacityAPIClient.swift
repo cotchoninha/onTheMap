@@ -10,6 +10,14 @@ import Foundation
 
 class UdacityAPIClient: NSObject{
     
+    //singleton
+    class func sharedInstance() -> UdacityAPIClient {
+        struct Singleton {
+            static var sharedInstance = UdacityAPIClient()
+        }
+        return Singleton.sharedInstance
+    }
+    
     // MARK: Properties
     
     // shared session

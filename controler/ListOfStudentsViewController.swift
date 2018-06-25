@@ -13,12 +13,10 @@ import FBSDKLoginKit
 class ListOfStudentsViewController: UITableViewController {
     
     var allStudents = [StudentInformation]()
-    var parseAPIClient = ParseAPIClient()
-    var udacityAPIClient = UdacityAPIClient()
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        parseAPIClient.getStudentsLocations {(success, studentsArray, error) in
+        ParseAPIClient.sharedInstance().getStudentsLocations {(success, studentsArray, error) in
             performUIUpdatesOnMain {
                 if success{
                     self.allStudents = studentsArray!
@@ -46,6 +44,7 @@ class ListOfStudentsViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let studentRow = self.allStudents[indexPath.row]
         guard let studentLink = studentRow.mediaURL else{
+            UserAlertManager.showAlert(title: "Empty link.", message: "There's no link for this student.", buttonMessage: "Ok.", viewController: self)
             print("there's no link for this student")
             return
         }
@@ -58,7 +57,7 @@ class ListOfStudentsViewController: UITableViewController {
     
     @IBAction func logoutButton(_ sender: Any) {
         
-        udacityAPIClient.logoutUser { (success, error) in
+        UdacityAPIClient.sharedInstance().logoutUser { (success, error) in
             performUIUpdatesOnMain {
                 if success{
                     FBSDKLoginManager().logOut()
@@ -83,7 +82,7 @@ class ListOfStudentsViewController: UITableViewController {
     }
     
     @IBAction func refreshButton(_ sender: Any) {
-        parseAPIClient.getStudentsLocations {(success, studentsArray, error) in
+        ParseAPIClient.sharedInstance().getStudentsLocations {(success, studentsArray, error) in
             performUIUpdatesOnMain {
                 if success{
                     self.allStudents = studentsArray!

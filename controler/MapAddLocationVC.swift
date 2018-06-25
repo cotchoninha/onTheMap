@@ -18,7 +18,6 @@ class AddMapViewController: UIViewController, MKMapViewDelegate{
     var userLink: String?
     var user: User?
     var appDelegate: AppDelegate!
-    var parseAPIClient = ParseAPIClient()
     
     
     //MARK: Methods
@@ -29,7 +28,7 @@ class AddMapViewController: UIViewController, MKMapViewDelegate{
     override func viewDidLoad() {
         super.viewDidLoad()
         appDelegate = UIApplication.shared.delegate as! AppDelegate
-        parseAPIClient.getUserInfo(accountKey: appDelegate.keyAccount!) { (success, user, error) in
+        ParseAPIClient.sharedInstance().getUserInfo(accountKey: appDelegate.keyAccount!) { (success, user, error) in
             if success{
                 self.user = user
             }else{
@@ -63,7 +62,7 @@ class AddMapViewController: UIViewController, MKMapViewDelegate{
     
     @IBAction func submitLocationButton(_ sender: Any) {
         
-        parseAPIClient.submitLocation(uniqueKey: user?.key, firstName: user?.first_name, lastName: user?.last_name, mapString: locationString, mediaURL: userLink, latitude: locationAnnotation?.coordinate.latitude, longitude: locationAnnotation?.coordinate.longitude) { (success, postNewLocation, error) in
+        ParseAPIClient.sharedInstance().submitLocation(uniqueKey: user?.key, firstName: user?.first_name, lastName: user?.last_name, mapString: locationString, mediaURL: userLink, latitude: locationAnnotation?.coordinate.latitude, longitude: locationAnnotation?.coordinate.longitude) { (success, postNewLocation, error) in
             if success{
                 performUIUpdatesOnMain {
                     let controller = self.storyboard!.instantiateViewController(withIdentifier: "UsersTabBarController")

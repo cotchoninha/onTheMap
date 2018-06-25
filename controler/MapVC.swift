@@ -15,14 +15,12 @@ class MapVC: UIViewController, MKMapViewDelegate{
     
     //MARK: Properties
     @IBOutlet weak var mapView: MKMapView!
-    var parseAPIClient = ParseAPIClient()
-    var udacityAPIClient = UdacityAPIClient()
     var allStudents = [StudentInformation]()
     var annotations = [MKPointAnnotation]()
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        parseAPIClient.getStudentsLocations {(success, studentsArray, error) in
+        ParseAPIClient.sharedInstance().getStudentsLocations {(success, studentsArray, error) in
             performUIUpdatesOnMain {
                 if success{
                     self.allStudents = studentsArray!
@@ -87,13 +85,17 @@ class MapVC: UIViewController, MKMapViewDelegate{
         if control == view.rightCalloutAccessoryView {
             let app = UIApplication.shared
             if let toOpen = view.annotation?.subtitle! {
-                app.open(URL(string: toOpen)!, options: [:], completionHandler: nil)
+                if toOpen == ""{
+                    UserAlertManager.showAlert(title: "Empty link.", message: "There's no link for this student.", buttonMessage: "Ok.", viewController: self)
+                }else{
+                    app.open(URL(string: toOpen)!, options: [:], completionHandler: nil)
+                }
             }
         }
     }
     
     @IBAction func refreshButton(_ sender: Any) {
-        parseAPIClient.getStudentsLocations {(success, studentsArray, error) in
+        ParseAPIClient.sharedInstance().getStudentsLocations {(success, studentsArray, error) in
             performUIUpdatesOnMain {
                 if success{
                     self.allStudents = studentsArray!
@@ -107,7 +109,7 @@ class MapVC: UIViewController, MKMapViewDelegate{
     }
     
     @IBAction func logoutButton(_ sender: Any) {
-        udacityAPIClient.logoutUser { (success, error) in
+        UdacityAPIClient.sharedInstance().logoutUser { (success, error) in
             performUIUpdatesOnMain {
                 if success{
                     FBSDKLoginManager().logOut()
