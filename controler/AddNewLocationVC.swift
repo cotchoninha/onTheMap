@@ -17,9 +17,15 @@ class AddNewLocationVC: UIViewController {
     //MARK: Properties
     @IBOutlet weak var locationTextField: UITextField!
     @IBOutlet weak var linkTextField: UITextField!
-
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+    @IBOutlet weak var findLocationButtonOutlet: UIButton!
+    
     //MARK: Methods
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        activityIndicator.isHidden = true
+    }
     @IBAction func cancelButton(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
     }
@@ -43,12 +49,21 @@ class AddNewLocationVC: UIViewController {
     }
     
     @IBAction func findLocationButton(_ sender: Any) {
+        activityIndicator.isHidden = false
+        activityIndicator.startAnimating()
+        findLocationButtonOutlet.isEnabled = false
    
         if locationTextField.text == "" || locationTextField.text == nil{
             UserAlertManager.showAlert(title: "INVALID LOCATION", message: "Please, enter a valid location", buttonMessage: "Ok!", viewController: self)
+            activityIndicator.stopAnimating()
+            activityIndicator.isHidden = true
+            findLocationButtonOutlet.isEnabled = true
         }else if linkTextField.text == "" || verifyUrl(urlString: linkTextField.text) == false{
             //checar se é o link URL
             UserAlertManager.showAlert(title: "INVALID LINK", message: "Please, enter a valid link", buttonMessage: "Ok!", viewController: self)
+            activityIndicator.stopAnimating()
+            activityIndicator.isHidden = true
+            findLocationButtonOutlet.isEnabled = true
         }else{
             let locationString = locationTextField.text
             let geocoder = CLGeocoder()
@@ -71,6 +86,9 @@ class AddNewLocationVC: UIViewController {
                         controller.locationString = locationString
                         controller.userLink = self.linkTextField.text
                         self.present(controller, animated: true, completion: nil)
+                        self.activityIndicator.stopAnimating()
+                        self.activityIndicator.isHidden = true
+                        self.findLocationButtonOutlet.isEnabled = true
                     }
                 }
             }

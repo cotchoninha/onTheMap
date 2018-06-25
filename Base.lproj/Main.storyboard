@@ -267,13 +267,18 @@
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_world" translatesAutoresizingMaskIntoConstraints="NO" id="uGu-nk-BFu">
                                 <rect key="frame" x="128" y="239" width="120" height="67"/>
                             </imageView>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="YbQ-Pt-kyg">
+                                <rect key="frame" x="177" y="429" width="20" height="20"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="bNw-Ng-Zys" firstAttribute="top" secondItem="Axc-hO-rib" secondAttribute="bottom" constant="8" id="5lD-3G-poO"/>
                             <constraint firstItem="Axc-hO-rib" firstAttribute="top" secondItem="uGu-nk-BFu" secondAttribute="bottom" constant="8" id="Cem-1f-wXW"/>
                             <constraint firstItem="sVI-78-7T4" firstAttribute="trailing" secondItem="Axc-hO-rib" secondAttribute="trailing" constant="72" id="Ewb-hp-SSE"/>
+                            <constraint firstItem="sVI-78-7T4" firstAttribute="trailing" secondItem="YbQ-Pt-kyg" secondAttribute="trailing" constant="178" id="M33-cK-Suu"/>
                             <constraint firstItem="Axc-hO-rib" firstAttribute="leading" secondItem="sVI-78-7T4" secondAttribute="leading" constant="71" id="Ske-Me-6g9"/>
+                            <constraint firstItem="YbQ-Pt-kyg" firstAttribute="top" secondItem="6ah-Tj-hHb" secondAttribute="bottom" constant="8" id="UTG-ZD-Mid"/>
                             <constraint firstItem="6ah-Tj-hHb" firstAttribute="centerY" secondItem="o8h-vA-CGe" secondAttribute="centerY" id="VqQ-Ch-eTf"/>
                             <constraint firstItem="vQq-j3-mO1" firstAttribute="trailing" secondItem="sVI-78-7T4" secondAttribute="trailing" id="W8J-EW-xjm"/>
                             <constraint firstItem="sVI-78-7T4" firstAttribute="trailing" secondItem="bNw-Ng-Zys" secondAttribute="trailing" constant="72" id="YwA-wP-XXl"/>
@@ -284,11 +289,14 @@
                             <constraint firstItem="bNw-Ng-Zys" firstAttribute="leading" secondItem="sVI-78-7T4" secondAttribute="leading" constant="71" id="pfk-Ei-NVa"/>
                             <constraint firstItem="sVI-78-7T4" firstAttribute="trailing" secondItem="6ah-Tj-hHb" secondAttribute="trailing" constant="72" id="t28-mY-7XC"/>
                             <constraint firstItem="uGu-nk-BFu" firstAttribute="leading" secondItem="sVI-78-7T4" secondAttribute="leading" constant="128" id="uDI-pz-Dex"/>
+                            <constraint firstItem="YbQ-Pt-kyg" firstAttribute="leading" secondItem="sVI-78-7T4" secondAttribute="leading" constant="177" id="vWl-f5-wx4"/>
                             <constraint firstItem="vQq-j3-mO1" firstAttribute="top" secondItem="sVI-78-7T4" secondAttribute="top" id="ybA-SK-Ft0"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="sVI-78-7T4"/>
                     </view>
                     <connections>
+                        <outlet property="activityIndicator" destination="YbQ-Pt-kyg" id="SE8-Hv-f8r"/>
+                        <outlet property="findLocationButtonOutlet" destination="6ah-Tj-hHb" id="nHD-l8-Pmb"/>
                         <outlet property="linkTextField" destination="bNw-Ng-Zys" id="rGS-Jy-8oA"/>
                         <outlet property="locationTextField" destination="Axc-hO-rib" id="JuO-rO-ZNJ"/>
                     </connections>
