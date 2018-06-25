@@ -76,6 +76,9 @@
                                     <constraint firstAttribute="height" constant="30" id="3up-Bh-uhe"/>
                                 </constraints>
                             </stackView>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="cFa-3m-pKZ">
+                                <rect key="frame" x="177" y="396" width="20" height="20"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
@@ -88,14 +91,18 @@
                             <constraint firstItem="nvK-hA-BHv" firstAttribute="top" secondItem="QKD-Fa-YIN" secondAttribute="bottom" constant="8" id="PkN-Jv-UDY"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="nvK-hA-BHv" secondAttribute="trailing" constant="56" id="VhF-m0-CxV"/>
                             <constraint firstItem="nvK-hA-BHv" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="56" id="WVe-JV-Ljj"/>
+                            <constraint firstItem="cFa-3m-pKZ" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="kH2-Qt-lZD"/>
                             <constraint firstItem="QKD-Fa-YIN" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="125" id="m75-c3-7vV"/>
                             <constraint firstItem="e2W-Y6-7KU" firstAttribute="top" secondItem="nvK-hA-BHv" secondAttribute="bottom" constant="8" id="oHs-go-okZ"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="e2W-Y6-7KU" secondAttribute="trailing" constant="56" id="qQC-Z7-D1q"/>
                             <constraint firstItem="e2W-Y6-7KU" firstAttribute="top" secondItem="nvK-hA-BHv" secondAttribute="bottom" constant="8" id="z3r-7l-j9Z"/>
+                            <constraint firstItem="cFa-3m-pKZ" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="zRO-9z-dNo"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
+                        <outlet property="activityIndicator" destination="cFa-3m-pKZ" id="99b-Qg-27p"/>
+                        <outlet property="loginButtonOutlet" destination="e2W-Y6-7KU" id="MTk-X1-16t"/>
                         <outlet property="passwordTextField" destination="nvK-hA-BHv" id="vSo-il-RtW"/>
                         <outlet property="usernameTextField" destination="QKD-Fa-YIN" id="W8y-tb-ZBU"/>
                     </connections>
