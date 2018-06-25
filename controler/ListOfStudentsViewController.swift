@@ -12,7 +12,7 @@ import FBSDKLoginKit
 
 class ListOfStudentsViewController: UITableViewController {
     
-    var allStudents = [Student]()
+    var allStudents = [StudentInformation]()
     var parseAPIClient = ParseAPIClient()
     var udacityAPIClient = UdacityAPIClient()
     

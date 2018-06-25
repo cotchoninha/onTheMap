@@ -10,9 +10,9 @@ import Foundation
 import UIKit
 import CoreLocation
 
-struct Student: Codable {
+struct StudentInformation: Codable {
     
-    static var allStudents = [Student]()
+    static var allStudents = [StudentInformation]()
     
     var objectId: String?
     var latitude: Float?
@@ -28,7 +28,7 @@ struct Student: Codable {
 }
 
 struct StudentResult: Codable {
-    var results: [Student]?
+    var results: [StudentInformation]?
 }
 
 struct UserKey: Codable{

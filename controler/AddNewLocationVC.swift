@@ -55,6 +55,7 @@ class AddNewLocationVC: UIViewController {
             geocoder.geocodeAddressString(locationString!) { (clPlacemarks, error) in
                 if error != nil{
                     print(error?.localizedDescription)
+                    UserAlertManager.showAlert(title: "Location not found.", message: "We couldn't find your location. Please, try changing your search parameters.", buttonMessage: "Try again.", viewController: self)
                 } else if let placemarks = clPlacemarks, placemarks.count > 0{
                     let placemark = placemarks[0]
                     if let location = placemark.location{

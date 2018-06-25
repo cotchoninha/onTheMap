@@ -11,7 +11,7 @@ import Foundation
 class ParseAPIClient: NSObject {
     
     //parse for student
-    func parseDataWithCodable(data: Data) -> [Student]? {
+    func parseDataWithCodable(data: Data) -> [StudentInformation]? {
         
         let jsonDecoder = JSONDecoder()
         do{
@@ -35,7 +35,7 @@ class ParseAPIClient: NSObject {
     }
     
     //get multiple students locations
-    func getStudentsLocations( _ completionHandlerForPOST: @escaping (_ success: Bool, _ allStudentsArray: [Student]?, _ error: Error?) -> Void){
+    func getStudentsLocations( _ completionHandlerForPOST: @escaping (_ success: Bool, _ allStudentsArray: [StudentInformation]?, _ error: Error?) -> Void){
         
         var request = URLRequest(url: URL(string: "https://parse.udacity.com/parse/classes/StudentLocation?limit=100&order=-updatedAt")!)
         request.addValue("QrX47CA9cyuGewLdsL7o5Eb8iug6Em8ye0dnAbIr", forHTTPHeaderField: "X-Parse-Application-Id")

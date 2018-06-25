@@ -17,7 +17,7 @@ class MapVC: UIViewController, MKMapViewDelegate{
     @IBOutlet weak var mapView: MKMapView!
     var parseAPIClient = ParseAPIClient()
     var udacityAPIClient = UdacityAPIClient()
-    var allStudents = [Student]()
+    var allStudents = [StudentInformation]()
     var annotations = [MKPointAnnotation]()
     
     override func viewWillAppear(_ animated: Bool) {
