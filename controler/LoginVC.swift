@@ -29,8 +29,6 @@ class LoginVC: UIViewController, LoginButtonDelegate{
     override func viewDidLoad() {
         super.viewDidLoad()
         activityIndicator.isHidden = true
-        usernameTextField.text = "cotchoninha@yahoo.com.br"
-        passwordTextField.text = "lulu1234"
         let loginButton = LoginButton(readPermissions: [ .publicProfile ])
         loginButton.delegate = self
         view.addSubview(loginButton)
