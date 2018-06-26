@@ -32,7 +32,7 @@ class ParseAPIClient: NSObject {
     }
     //parse generic type for userInfo
     func parseDataWithCodableGenericType<T: Decodable>(_ type: T.Type, data: Data) -> T? {
-        
+            
         let jsonDecoder = JSONDecoder()
         do{
             return try jsonDecoder.decode(type, from: data)

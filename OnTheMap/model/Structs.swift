@@ -12,8 +12,6 @@ import CoreLocation
 
 struct StudentInformation: Codable {
     
-    static var allStudents = [StudentInformation]()
-    
     var objectId: String?
     var latitude: Float?
     var mapString: String?
